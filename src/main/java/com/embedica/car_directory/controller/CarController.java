@@ -12,6 +12,7 @@ import java.text.ParseException;
 
 import java.util.Calendar;
 
+import java.util.Comparator;
 import java.util.List;
 
 import java.util.stream.Collectors;
@@ -35,7 +36,8 @@ public class CarController {
     public List<Car> findAll() {
         var list = StreamSupport.stream(
                 this.carService.findAll().spliterator(), false
-        ).collect(Collectors.toList());
+        ).sorted(Comparator.comparingInt(Car::getId))
+        .collect(Collectors.toList());
         return list;
     }
 
@@ -67,7 +69,7 @@ public class CarController {
     }
 
     /**
-     * The date last write Car object
+     * The date last write Car object //SH12
      * @return calendar date
      */
     @GetMapping("/lastDate")
@@ -95,7 +97,6 @@ public class CarController {
      * @param id Car object
      * @return HTTP status code and if the operation was successful Automotive object
      */
-    //TODO добавить валидацию ИД
     @DeleteMapping("/rmv/{id}")
     public ResponseEntity<Car> removeCar(@PathVariable int id) {
         var count = carService.count();
@@ -106,7 +107,7 @@ public class CarController {
         }
         var rsl = carService.whenRemovedCar(id);
         return new ResponseEntity<>(rsl,
-                rsl.getColor() != null & rsl.getMark() != null ?
+                rsl.getColor() != null && rsl.getMark() != null ?
                         HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
 
@@ -120,7 +121,7 @@ public class CarController {
         return new ResponseEntity<>(rsl,
                  HttpStatus.OK);
     }
-//todo valodate
+
 
     /**
      *Getting a list of entities from the database,
@@ -130,12 +131,15 @@ public class CarController {
      */
     @GetMapping("/fndByClr/{color}")
      public List<Car> findAllByColor(@PathVariable String color) {
+        if (carService.matchesColor(color).equals("not registered")) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "The color object must be correct.");
+        }
         return StreamSupport.stream(
                 this.carService.findUsingColor(color).spliterator(), false
         ).collect(Collectors.toList());
     }
-
-//todo validate
 
     /**
      * Find Car object by year and color
@@ -152,13 +156,17 @@ public class CarController {
     }
 
     /**
-     *  Find Car object by year
+     *  Find Car object by moreThan year
      * @param year
      * @return List<Car>
      */
     @GetMapping("/fndByMTYear/{year}")
     public List<Car> findAllByYear(@PathVariable int year) {
-
+        if (year > 2022 || year < 1890) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "The color object must be correct.");
+        }
         return StreamSupport.stream(
                 this.carService.findMoreThanYear(year).spliterator(), false
         ).collect(Collectors.toList());
@@ -170,7 +178,6 @@ public class CarController {
      */
     @GetMapping("/ordByYear")
     public List<Car> orderAllByYear() {
-
         return StreamSupport.stream(
                 this.carService.orderByYear().spliterator(), false
         ).collect(Collectors.toList());

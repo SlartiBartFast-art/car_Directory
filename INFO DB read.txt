@@ -1,0 +1,3 @@
+Create DB = car_directory_embedika@localhost
+create table = db/schema.sql
+insert table = bd/insert.sql

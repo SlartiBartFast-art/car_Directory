@@ -1,12 +1,10 @@
 package com.embedica.car_directory.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jdk.jfr.Timestamp;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * модель, описывает абстракцию Автомобиль

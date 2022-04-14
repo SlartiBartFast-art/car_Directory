@@ -1,0 +1,4 @@
+VALUES (CURRENT_TIMESTAMP, 'black', 'DODGE', 'A589AA177Rus', 2011),
+       (CURRENT_TIMESTAMP, 'white', 'FORD', 'A117AA177Rus', 2018),
+       (CURRENT_TIMESTAMP, 'Green', 'Chevrolet', 'R089AA89Rus', 2021),
+       (CURRENT_TIMESTAMP, 'Red', 'Buick', 'T115PP117Rus', 2008);

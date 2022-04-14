@@ -44,22 +44,18 @@ public interface CarRepository extends CrudRepository<Car, Integer> {
     List<Car> findAllByYear(int year);
 
     /**
-     * количество записей
-     *
-     * @return
-     */
-    @Query("select count(u.id) from Car as u")
-    public int countAllById();
-
-    /**
      * дата добавления первой записи
      *
      * @return Car
      */
     @Query("select u from Car as u where u.id = 1")
-    public Car findFirstByCalendar();
+    Car findFirstByCalendar();
 
-    //Сортировка по атрибутам при запросе списка;U
+    /**
+     * resultset order by year Object
+     *
+     * @return List<Car>
+     */
     @Query("select u from Car as u order by u.year")
-    public List<Car> findCarByYearOrderByYear();
+    List<Car> findCarByYearOrderByYear();
 }

@@ -2,26 +2,58 @@ package com.embedica.car_directory.service;
 
 import com.embedica.car_directory.model.Car;
 import com.embedica.car_directory.repository.CarRepository;
-import com.fasterxml.jackson.annotation.JsonFormat;
+
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class CarService {
 
+    private final ConcurrentHashMap<String, String> colors = new ConcurrentHashMap<>();
+
     private CarRepository carRepository;
 
     public CarService(CarRepository carRepository) {
+        init();
         this.carRepository = carRepository;
     }
 
+    void init() {
+        colors.put("White", "White");
+        colors.put("Black", "Black");
+        colors.put("Red", "Red");
+        colors.put("Blue", "Blue");
+        colors.put("Green", "Green");
+        colors.put("Yellow", "Yellow");
+        colors.put("Orange", "Orange");
+        colors.put("Gray", "Gray");
+    }
+
+    public String matchesColor(String string) {
+        String rsl = "not registered";
+        if (colors.contains(string)) {
+            return colors.get(string);
+        }
+        return rsl;
+    }
+
+    /**
+     * Find all Entity in DB
+     * @return List<Car>
+     */
     public Iterable<Car> findAll() {
         return carRepository.findAll();
     }
 
+    /**
+     * Save object Car in to DB if him not exist
+     * @param car
+     * @return
+     */
     public Map<Boolean, Car> save(Car car) {
         Map<Boolean, Car> carBooleanMap = new HashMap<>();
         Optional<Car> rsl = carRepository.findCarByNumberAndMarkAndColorAndYear(
@@ -31,7 +63,8 @@ public class CarService {
                 car.getYear()
         );
         if (rsl.isEmpty()) {
-            carBooleanMap.put(true, carRepository.save(car));
+            car.setCalendar(Calendar.getInstance());
+            carBooleanMap.put(true,carRepository.save(car));
             return carBooleanMap;
         }
         carBooleanMap.put(false, car);
@@ -43,43 +76,29 @@ public class CarService {
      * @return
      */
     public Calendar dateOfLastEntry() {
-//        Calendar calendar = Calendar.getInstance();
-//
-//        System.out.println("Convert " + calendar);
 
-//        var id = carRepository.countAllById();
-        var count = carRepository.count(); // общее колл-во
+        var count = carRepository.count();
         var car = carRepository.findById(Math.toIntExact(count));
         if (car.isPresent()) {
-            Calendar date = car.get().getCalendar();
-//            System.out.println("car.get().getCalendar() " + car.get().getCalendar());
-//            calendar.setTime(date);
-//            System.out.println("CALENDAR  " + date);
-//            return date.toString();
-            return date;
+            return car.get().getCalendar();
         }
-        return null; //todo
+        return null;
     }
 
-    public Calendar dateOfFirstEntry() throws ParseException {
+    /**
+     * Find date when was created first entity
+     * @return Calendar
+     * @throws ParseException
+     */
+    public Calendar dateOfFirstEntry() {
         var count = carRepository.count();
         if (count != 0) {
             var car = carRepository.findById(1);
             if (car.isPresent()) {
-                System.out.println("dateOfFirstEntry() -> " + car.get().getCalendar());
                 return car.get().getCalendar();
             }
         }
-        return whenDateIsEmpty();
-    }
-
-    private Calendar whenDateIsEmpty() throws ParseException {
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
-        String dateInString = "22-01-2015 10:20:56";
-        Date date = sdf.parse(dateInString);
-        calendar.setTime(date);
-        return calendar;
+        return null;
     }
 
     /**
@@ -107,6 +126,7 @@ public class CarService {
     }
 
     /**
+     * The method returns the total number of entities saved so far
      * @return
      */
     public String countStatistic() {
@@ -148,6 +168,10 @@ public class CarService {
         return carRepository.findAllByYear(year);
     }
 
+    /**
+     * The method returns the List<Car> orderByYear
+     * @return List<Car>
+     */
     public List<Car> orderByYear() {
         return carRepository.findCarByYearOrderByYear();
     }

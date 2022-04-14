@@ -1,14 +1,5 @@
-create table car
-(
-    id       serial    not null,
-    calendar timestamp not null,
-    color    varchar(255),
-    mark     varchar(255),
-    number   varchar(255),
-    year     int4      not null,
-    primary key (id)
-);
 insert into car(calendar, color, mark, number, year)
-VALUES (CURRENT_TIMESTAMP, 'black', 'DODGE', 'A589AA177Rus', 2011),
-       (CURRENT_TIMESTAMP, 'white', 'FORD', 'A117AA177Rus', 2018),
-    (CURRENT_TIMESTAMP, 'Green', 'Chevrolet', 'R089AA89Rus', 2021);
+VALUES ('2022-04-10 15:57:59.532000', 'Black', 'DODGE', 'A589AA177Rus', 2011),
+       ('2022-04-11 17:57:59.532000', 'White', 'FORD', 'A117AA177Rus', 2018),
+       ('2022-04-12 18:57:59.532000', 'Green', 'Chevrolet', 'R089AA89Rus', 2021),
+       ('2022-04-09 18:57:59.532000', 'Red', 'Buick', 'T115PP117Rus', 2008);
