@@ -42,6 +42,9 @@ after
 
 ![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_5.jpg)
 
+валидация
+
+![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_14.jpg)
 
 - /fndByClr/{color}
 Получение списка сущностей из БД по указанному параметру(цвет)
@@ -54,12 +57,18 @@ after
   
   ![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_9.jpg)
 
+валидация
+![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_17.jpg)
 
 - /fndByMTYear/{year}
   Получение списка сущностей из БД используя параметр (moreThan-больше чем)
   
   ![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_10.jpg)
 
+валидация
+![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_15.jpg)
+
+![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_16.jpg)
 
 - /ordByYear
   Получение сущностей из БД отсортированных по годам в порядке возрастания

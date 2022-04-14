@@ -5,9 +5,13 @@ import com.embedica.car_directory.service.CarService;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.text.ParseException;
 
 import java.util.Calendar;
@@ -18,6 +22,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+@Validated
 @RestController
 @RequestMapping("/cars")
 public class CarController {
@@ -48,13 +53,8 @@ public class CarController {
      * @return ResponseEntity<Car>
      */
     @PostMapping("/income")
-    public ResponseEntity<Car> whenAddNewCar(@RequestBody Car car) {
-        if (car.getNumber().equals(null)
-                || car.getMark().equals(null)
-                || car.getColor().equals(null)
-                || car.getYear() == 0) {
-            return new ResponseEntity<>(car, HttpStatus.BAD_REQUEST);
-        }
+    public ResponseEntity<Car> whenAddNewCar(@Valid @RequestBody Car car ) {
+
        var rsl = carService.save(car);
         if (rsl.containsKey(false)) {
             throw new ResponseStatusException(
@@ -69,7 +69,7 @@ public class CarController {
     }
 
     /**
-     * The date last write Car object //SH12
+     * The date last write Car object
      * @return calendar date
      */
     @GetMapping("/lastDate")
@@ -98,9 +98,9 @@ public class CarController {
      * @return HTTP status code and if the operation was successful Automotive object
      */
     @DeleteMapping("/rmv/{id}")
-    public ResponseEntity<Car> removeCar(@PathVariable int id) {
+    public ResponseEntity<Car> removeCar(@PathVariable("id") @Min(1) int id) {
         var count = carService.count();
-        if (id < 1 && id > count) {
+        if (id > count) {
          throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST,
                     "The object id must be correct already exist!!!.");
@@ -130,7 +130,7 @@ public class CarController {
      * @return List<Car>
      */
     @GetMapping("/fndByClr/{color}")
-     public List<Car> findAllByColor(@PathVariable String color) {
+     public List<Car> findAllByColor(@PathVariable ("color") String color) {
         if (carService.matchesColor(color).equals("not registered")) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST,
@@ -148,8 +148,8 @@ public class CarController {
      * @return List<Car>
      */
     @GetMapping("/fndByClrAndYear")
-    public List<Car> findAllByColor(@RequestParam int year,
-                                    @RequestParam String color) {
+    public List<Car> findAllByColor(@Valid @RequestParam int year,
+                                    @Valid @RequestParam String color) {
         return StreamSupport.stream(
                 this.carService.findUsingYearAnfColor(year, color).spliterator(), false
         ).collect(Collectors.toList());
@@ -161,12 +161,7 @@ public class CarController {
      * @return List<Car>
      */
     @GetMapping("/fndByMTYear/{year}")
-    public List<Car> findAllByYear(@PathVariable int year) {
-        if (year > 2022 || year < 1890) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST,
-                    "The color object must be correct.");
-        }
+    public List<Car> findAllByYear(@PathVariable("year") @Min(1890) @Max(2022) int year) {
         return StreamSupport.stream(
                 this.carService.findMoreThanYear(year).spliterator(), false
         ).collect(Collectors.toList());
