@@ -138,7 +138,7 @@ public class CarController {
                     HttpStatus.BAD_REQUEST,
                     "The color object must be correct.");
         }
-        return this.carService.findUsingColor(color).stream().toList();
+        return this.carService.findUsingColor(color);
     }
 
     /**
@@ -151,7 +151,7 @@ public class CarController {
     @GetMapping("/fndByClrAndYear")
     public List<Car> findAllByColor(@Valid @RequestParam int year,
                                     @Valid @RequestParam String color) {
-        return this.carService.findUsingYearAnfColor(year, color).stream().toList();
+        return this.carService.findUsingYearAnfColor(year, color);
     }
 
     /**
@@ -162,7 +162,7 @@ public class CarController {
      */
     @GetMapping("/fndByMTYear/{year}")
     public List<Car> findAllByYear(@PathVariable("year") @Min(1890) @Max(2022) int year) {
-        return this.carService.findMoreThanYear(year).stream().toList();
+        return this.carService.findMoreThanYear(year);
     }
 
     /**
@@ -172,6 +172,6 @@ public class CarController {
      */
     @GetMapping("/ordByYear")
     public List<Car> orderAllByYear() {
-        return this.carService.orderByYear().stream().toList();
+        return this.carService.orderByYear();
     }
 }
