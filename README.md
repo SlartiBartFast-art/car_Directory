@@ -1,6 +1,6 @@
 # “Справочник автомобилей”
 
-
+[![Build Status](https://app.travis-ci.com/SlartiBartFast-art/car_Directory.svg?branch=master)](https://app.travis-ci.com/SlartiBartFast-art/car_Directory)
 ____________________
 
    Реализовать сервис справочника автомобилей с хранением
@@ -14,6 +14,12 @@ ____________________
 - Год выпуска;
 
 ![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_1.jpg)
+
+Дополнительные необязательные условия (будут плюсом):
+- Сортировка по атрибутам при запросе списка;
+- Дополнительные атрибуты объектов;
+- API можно усложнять и менять, при условии соответствия минимальным
+требованиям
 
 Used technologies
 ______________________________________________
