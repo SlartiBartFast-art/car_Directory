@@ -4,9 +4,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.Calendar;
 
 /**
@@ -19,13 +16,12 @@ public class Car {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotBlank(message = "Number must be not empty")
     private String number;
-    @NotBlank(message = "Mark must be not empty")
+
     private String mark;
-    @NotBlank(message = "Color must be not empty")
+
     private String color;
-    @Min(value = 1890, message = "Year must be more than 1980")
+
     private int year;
 
     @Temporal(TemporalType.TIMESTAMP)

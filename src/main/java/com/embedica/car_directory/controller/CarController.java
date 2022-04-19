@@ -1,7 +1,11 @@
 package com.embedica.car_directory.controller;
 
 import com.embedica.car_directory.model.Car;
+
+import com.embedica.car_directory.model.CarDto;
 import com.embedica.car_directory.service.CarService;
+
+import org.modelmapper.ModelMapper;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,50 +16,45 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import java.text.ParseException;
 
 import java.util.Calendar;
 
-import java.util.Comparator;
 import java.util.List;
-
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @Validated
 @RestController
 @RequestMapping("/cars")
 public class CarController {
 
-    private CarService carService;
+    private final CarService carService;
 
-    public CarController(CarService carService) {
+    private final ModelMapper modelMapper;
+
+    public CarController(CarService carService, ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
         this.carService = carService;
     }
 
     /**
      * The getting a list of all records
+     *
      * @return List<Car>
      */
     @GetMapping("/all")
     public List<Car> findAll() {
-        var list = StreamSupport.stream(
-                this.carService.findAll().spliterator(), false
-        ).sorted(Comparator.comparingInt(Car::getId))
-        .collect(Collectors.toList());
-        return list;
+        return carService.findAllByOrder();
     }
 
     /**
      * Добавление автомобиля
      * Результат операции (успех, ошибка, объект уже существует)
+     *
      * @param car Object Car
      * @return ResponseEntity<Car>
      */
     @PostMapping("/income")
-    public ResponseEntity<Car> whenAddNewCar(@Valid @RequestBody Car car ) {
-
-       var rsl = carService.save(car);
+    public ResponseEntity<Car> whenAddNewCar(@Valid @RequestBody CarDto car) {
+        var rsl = carService.save(modelMapper.map(car, Car.class));
         if (rsl.containsKey(false)) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST,
@@ -70,6 +69,7 @@ public class CarController {
 
     /**
      * The date last write Car object
+     *
      * @return calendar date
      */
     @GetMapping("/lastDate")
@@ -85,7 +85,7 @@ public class CarController {
      * @return calendar date
      */
     @GetMapping("/firstDate")
-    public ResponseEntity<Calendar> whenFirstDateCar() throws ParseException {
+    public ResponseEntity<Calendar> whenFirstDateCar() {
         var rsl = carService.dateOfFirstEntry();
         return new ResponseEntity<>(rsl,
                 rsl != null ? HttpStatus.OK : HttpStatus.NOT_FOUND);
@@ -94,16 +94,17 @@ public class CarController {
 
     /**
      * The remove Car object by Id
+     *
      * @param id Car object
      * @return HTTP status code and if the operation was successful Automotive object
      */
-    @DeleteMapping("/rmv/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Car> removeCar(@PathVariable("id") @Min(1) int id) {
-        var count = carService.count();
+        var count = carService.findIdLastEntity();
         if (id > count) {
-         throw new ResponseStatusException(
+            throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST,
-                    "The object id must be correct already exist!!!.");
+                    "The object id must be correct, object like this id don't exist!");
         }
         var rsl = carService.whenRemovedCar(id);
         return new ResponseEntity<>(rsl,
@@ -113,68 +114,64 @@ public class CarController {
 
     /**
      * Database statistics - number of records
+     *
      * @return String object
      */
     @GetMapping("/stcCount")
     public ResponseEntity<String> getAllCountStatistics() {
-        String rsl = carService.countStatistic();
-        return new ResponseEntity<>(rsl,
-                 HttpStatus.OK);
+        return new ResponseEntity<>(carService.countStatistic(),
+                HttpStatus.OK);
     }
 
 
     /**
-     *Getting a list of entities from the database,
-     *  by the specified parameter (color)
+     * Getting a list of entities from the database,
+     * by the specified parameter (color)
+     *
      * @param color object
      * @return List<Car>
      */
     @GetMapping("/fndByClr/{color}")
-     public List<Car> findAllByColor(@PathVariable ("color") String color) {
+    public List<Car> findAllByColor(@PathVariable("color") String color) {
         if (carService.matchesColor(color).equals("not registered")) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST,
                     "The color object must be correct.");
         }
-        return StreamSupport.stream(
-                this.carService.findUsingColor(color).spliterator(), false
-        ).collect(Collectors.toList());
+        return this.carService.findUsingColor(color).stream().toList();
     }
 
     /**
      * Find Car object by year and color
-     * @param year
-     * @param color
+     *
+     * @param year Car object
+     * @param color Car object
      * @return List<Car>
      */
     @GetMapping("/fndByClrAndYear")
     public List<Car> findAllByColor(@Valid @RequestParam int year,
                                     @Valid @RequestParam String color) {
-        return StreamSupport.stream(
-                this.carService.findUsingYearAnfColor(year, color).spliterator(), false
-        ).collect(Collectors.toList());
+        return this.carService.findUsingYearAnfColor(year, color).stream().toList();
     }
 
     /**
-     *  Find Car object by moreThan year
-     * @param year
+     * Find Car object by moreThan year
+     *
+     * @param year Car Object
      * @return List<Car>
      */
     @GetMapping("/fndByMTYear/{year}")
     public List<Car> findAllByYear(@PathVariable("year") @Min(1890) @Max(2022) int year) {
-        return StreamSupport.stream(
-                this.carService.findMoreThanYear(year).spliterator(), false
-        ).collect(Collectors.toList());
+        return this.carService.findMoreThanYear(year).stream().toList();
     }
 
     /**
      * Return ResultSet order by year all notes in DB
+     *
      * @return List<Car>
      */
     @GetMapping("/ordByYear")
     public List<Car> orderAllByYear() {
-        return StreamSupport.stream(
-                this.carService.orderByYear().spliterator(), false
-        ).collect(Collectors.toList());
+        return this.carService.orderByYear().stream().toList();
     }
 }

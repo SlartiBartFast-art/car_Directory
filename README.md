@@ -88,9 +88,14 @@ after
 ![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_13.jpg)
 
 
-- /rmv/{id}
-Удаление хранимой сущности из БД по ее id
+- /{id}
+  Удаление хранимой сущности из БД по ее id
   
+добавим:
+
+![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_18.jpg)
+
+удалим:  
 ![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_6.jpg)
 
   
