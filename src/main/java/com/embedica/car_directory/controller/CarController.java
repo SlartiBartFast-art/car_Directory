@@ -56,10 +56,11 @@ public class CarController {
     public ResponseEntity<Car> whenAddNewCar(@Valid @RequestBody CarDto car) {
         var rsl = carService.save(modelMapper.map(car, Car.class));
         if (rsl.containsKey(false)) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST,
-                    "The object is already exist!!!."
-            );
+            throw new IllegalArgumentException("The object is already exist!!!.");
+//            throw new ResponseStatusException(
+//                    HttpStatus.BAD_REQUEST,
+//                    "The object is already exist!!!."
+//            );
         }
         return new ResponseEntity<>(
                 rsl.get(true),
@@ -102,9 +103,11 @@ public class CarController {
     public ResponseEntity<Car> removeCar(@PathVariable("id") @Min(1) int id) {
         var count = carService.findIdLastEntity();
         if (id > count) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST,
+            throw new IllegalArgumentException(
                     "The object id must be correct, object like this id don't exist!");
+//            throw new ResponseStatusException(
+//                    HttpStatus.BAD_REQUEST,
+//                    "The object id must be correct, object like this id don't exist!");
         }
         var rsl = carService.whenRemovedCar(id);
         return new ResponseEntity<>(rsl,
@@ -117,7 +120,7 @@ public class CarController {
      *
      * @return String object
      */
-    @GetMapping("/stcCount")
+    @GetMapping("/statisticsCount")
     public ResponseEntity<String> getAllCountStatistics() {
         return new ResponseEntity<>(carService.countStatistic(),
                 HttpStatus.OK);
@@ -131,12 +134,14 @@ public class CarController {
      * @param color object
      * @return List<Car>
      */
-    @GetMapping("/fndByClr/{color}")
+    @GetMapping("/fndByColor/{color}")
     public List<Car> findAllByColor(@PathVariable("color") String color) {
         if (carService.matchesColor(color).equals("not registered")) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST,
-                    "The color object must be correct.");
+            throw new IllegalArgumentException(
+                    "The color object must be correct!");
+//            throw new ResponseStatusException(
+//                    HttpStatus.BAD_REQUEST,
+//                    "The color object must be correct.");
         }
         return this.carService.findUsingColor(color);
     }
@@ -148,7 +153,7 @@ public class CarController {
      * @param color Car object
      * @return List<Car>
      */
-    @GetMapping("/fndByClrAndYear")
+    @GetMapping("/findByYearAndColor")
     public List<Car> findAllByColor(@Valid @RequestParam int year,
                                     @Valid @RequestParam String color) {
         return this.carService.findUsingYearAnfColor(year, color);
@@ -160,7 +165,7 @@ public class CarController {
      * @param year Car Object
      * @return List<Car>
      */
-    @GetMapping("/fndByMTYear/{year}")
+    @GetMapping("/findByMoreThanYear/{year}")
     public List<Car> findAllByYear(@PathVariable("year") @Min(1890) @Max(2022) int year) {
         return this.carService.findMoreThanYear(year);
     }
@@ -170,7 +175,7 @@ public class CarController {
      *
      * @return List<Car>
      */
-    @GetMapping("/ordByYear")
+    @GetMapping("/orderByYear")
     public List<Car> orderAllByYear() {
         return this.carService.orderByYear();
     }
