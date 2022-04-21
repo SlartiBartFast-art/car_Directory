@@ -7,9 +7,6 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import java.util.Calendar;
 
-/**
- * Car DTO Object
- */
 @Data
 @NoArgsConstructor
 public class CarDto {

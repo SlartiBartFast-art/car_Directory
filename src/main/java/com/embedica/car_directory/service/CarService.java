@@ -62,15 +62,15 @@ public class CarService {
      * @return car object
      */
     public Map<Boolean, Car> save(Car car) {
-        Map<Boolean, Car> carBooleanMap = new HashMap<>();
+        Map<Boolean, Car> booleanCarMap = new HashMap<>();
         var rsl = carRepository.findById(car.getId());
         if (rsl.isEmpty()) {
             car.setCalendar(Calendar.getInstance());
-            carBooleanMap.put(true, carRepository.save(car));
-            return carBooleanMap;
+            booleanCarMap.put(true, carRepository.save(car));
+            return booleanCarMap;
         }
-        carBooleanMap.put(false, carRepository.save(updateCar(rsl.get(), car)));
-        return carBooleanMap;
+        booleanCarMap.put(false, carRepository.save(updateCar(rsl.get(), car)));
+        return booleanCarMap;
     }
     
     private Car updateCar(Car rsl, Car car) {
@@ -121,10 +121,10 @@ public class CarService {
      * @return Car obj if present or empty Car object if not
      */
     public Car delete(int id) {
-        var rsl = carRepository.findById(id);
-        if (rsl.isPresent()) {
+        var rslOptional = carRepository.findById(id);
+        if (rslOptional.isPresent()) {
             carRepository.deleteById(id);
-            return rsl.get();
+            return rslOptional.get();
         }
         // TODO : ЖОПА 2 - Car.EMPTY || (null || Car) || Optional<Car>
         return Car.of(null, null, null, 0);
@@ -145,7 +145,7 @@ public class CarService {
      * @return String value or "Is empty!"
      */
     public String statistic() {
-        Long rsl = carRepository.count();
+        var rsl = carRepository.count();
         if (rsl == 0) {
             return "Is empty!";
         }

@@ -10,6 +10,7 @@ package com.embedica.car_directory;
  * TODO global: все id обычно это тип Long(именно Object, что бы можно быть использовать null)
  * TODO global: docker || in memory DB
  * TODO global: Расширить статистику и отдавать Object
+ * TODO global: Postman collection for review
 
  *
  * * 2 - по возможности сортировка && фильтрация не должна быть в коде, когда она может быть сделана БАЗОЙ - База под эти операции Специально заточена, она специализируется на этом - findAllCardSortedById
