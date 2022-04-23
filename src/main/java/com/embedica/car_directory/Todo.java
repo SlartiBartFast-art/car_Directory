@@ -5,11 +5,9 @@ package com.embedica.car_directory;
  * TODO global: Универсальны метод GET с параметрами + Сортировка
  * TODO global: Универсальны метод GET с параметрами + Пагинация
 
- * TODO global: метод controller.save выглядит как жопа.
- * TODO global: метод controller.delete выглядит как жопа.
- * TODO global: все id обычно это тип Long(именно Object, что бы можно быть использовать null)
+*
  * TODO global: docker || in memory DB
- * TODO global: Расширить статистику и отдавать Object
+*
  * TODO global: Postman collection for review
 
  *
@@ -76,10 +74,7 @@ package com.embedica.car_directory;
  *  1 - база url должна быть в Единственном числе, а не во множественном. /cars -> /car
  *  2 - GET /car/all -> GET /car
  *  2 - POST /car/income -> POST /car
- * TODO:
- * TODO:
- * TODO:
- * TODO:
+ *
  */
 public interface Todo {
 }

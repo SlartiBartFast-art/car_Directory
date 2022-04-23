@@ -2,19 +2,18 @@ package com.embedica.car_directory.controller;
 
 import com.embedica.car_directory.model.Car;
 import com.embedica.car_directory.model.CarDto;
+import com.embedica.car_directory.model.Statistic;
 import com.embedica.car_directory.service.CarService;
 import lombok.RequiredArgsConstructor;
-import lombok.val;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -26,13 +25,13 @@ import java.util.List;
 @RequestMapping("/car")
 @RequiredArgsConstructor
 public class CarController {
-    
+
     private final CarService carService;
     private final ModelMapper modelMapper;
     @PersistenceContext
     private final EntityManager entityManager;
-    
-    
+
+
     /**
      * The getting a list of all records
      *
@@ -60,7 +59,7 @@ public class CarController {
         
         return entityManager.createQuery(criteriaQuery).getResultList();
     }*/
-    
+
     /**
      * Добавление автомобиля
      * Результат операции (успех, ошибка, объект уже существует)
@@ -68,26 +67,21 @@ public class CarController {
      * @param car Object Car
      * @return ResponseEntity<Car>
      */
-    // TODO : ЖОПА 1 - Map<Boolean, Car> - решение отстой, лучше уж:
-    //    1 - null || Car
-    //    2 - Optional<Car>
-    //    3 - Car.EMPTY
     @PostMapping
     public ResponseEntity<Car> add(@Valid @RequestBody CarDto car) {
         var rsl = carService.save(modelMapper.map(car, Car.class));
-        if (rsl.containsKey(false)) {
-            throw new IllegalArgumentException("The object is already exist!!!.");
-//            throw new ResponseStatusException(
-//                    HttpStatus.BAD_REQUEST,
-//                    "The object is already exist!!!."
-//            );
+        if (rsl.getId() == 0) {
+            throw new ResponseStatusException(
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    "We're sorry, server error, please try again later!"
+            );
         }
         return new ResponseEntity<>(
-                rsl.get(true),
+                rsl,
                 HttpStatus.OK
         );
     }
-    
+
     /**
      * The date last write Car object
      *
@@ -99,7 +93,7 @@ public class CarController {
         return new ResponseEntity<>(rsl,
                 rsl != null ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
-    
+
     /**
      * The date first write Car object
      *
@@ -110,52 +104,36 @@ public class CarController {
         var rsl = carService.dateOfFirstEntry();
         return new ResponseEntity<>(rsl,
                 rsl != null ? HttpStatus.OK : HttpStatus.NOT_FOUND);
-        
+
     }
-    
+
     /**
      * The remove Car object by Id
      *
      * @param id Car object
      * @return HTTP status code and if the operation was successful Automotive object
      */
-    // TODO : ЖОПА 2 - Car.EMPTY || (null || Car) || Optional<Car>
     @DeleteMapping("/{id}")
-    public ResponseEntity<Car> delete(@PathVariable("id") @Min(1) int id) {
-        var count = carService.findIdLastEntity();
-        if (id > count) {
+    public ResponseEntity<Void> delete(@PathVariable("id") @Min(1) Long id) {
+        if (id > carService.findIdLastEntity()) {
             throw new IllegalArgumentException(
                     "The object id must be correct, object like this id don't exist!");
-//            throw new ResponseStatusException(
-//                    HttpStatus.BAD_REQUEST,
-//                    "The object id must be correct, object like this id don't exist!");
         }
-        var rsl = carService.delete(id);
-        
-        // TODO : ЖОПА 2 - Car.EMPTY || (null || Car) || Optional<Car>
-        return new ResponseEntity<>(rsl,
-                rsl.getColor() != null && rsl.getMark() != null ?
-                        HttpStatus.OK : HttpStatus.NOT_FOUND);
-
-
-/*        if (carService.contains(id)) throw new IllegalArgumentException(
-                    "The object id must be correct, object like this id don't exist!");
-        var rsl = carService.whenRemovedCar(id);
-        return rsl.map(it -> new ResponseEntity(it, HttpStatus.OK))
-                .orElse(new ResponseEntity(null, HttpStatus.NOT_FOUND));*/
+        return new ResponseEntity<>(
+                carService.deleteById(id) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
-    
+
     /**
-     * Database statistics - number of records
+     * Database statistics
      *
-     * @return String object
+     * @return Statistic object
      */
     @GetMapping("/statistics")
-    public ResponseEntity<String> statistics() {
+    public ResponseEntity<Statistic> statistics() {
         return new ResponseEntity<>(carService.statistic(), HttpStatus.OK);
     }
-    
-    
+
+
     /**
      * Getting a list of entities from the database,
      * by the specified parameter (color)
@@ -163,19 +141,16 @@ public class CarController {
      * @param color object
      * @return List<Car>
      */
-    // TODO : ЖОПА 3 - SET || TABLE + MAGIC VALUE - not const
+
     @GetMapping("/fndByColor/{color}")
     public List<Car> findAllByColor(@PathVariable("color") String color) {
-        if (carService.matches(color).equals("not registered")) {
+        if (carService.matches(color)) {
             throw new IllegalArgumentException(
                     "The color object must be correct!");
-//            throw new ResponseStatusException(
-//                    HttpStatus.BAD_REQUEST,
-//                    "The color object must be correct.");
         }
         return this.carService.findUsingColor(color);
     }
-    
+
     /**
      * Find Car object by year and color
      *
@@ -188,7 +163,7 @@ public class CarController {
                                     @Valid @RequestParam String color) {
         return this.carService.findUsingYearAnfColor(year, color);
     }
-    
+
     /**
      * Find Car object by moreThan year
      *
@@ -199,7 +174,7 @@ public class CarController {
     public List<Car> findAllByYear(@PathVariable("year") @Min(1890) @Max(2022) int year) {
         return this.carService.findMoreThanYear(year);
     }
-    
+
     /**
      * Return ResultSet order by year all notes in DB
      *

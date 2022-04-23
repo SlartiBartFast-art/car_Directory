@@ -18,10 +18,14 @@ public class Car {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String number;
     private String mark;
-    private String color;
+
+    @OneToOne
+    @JoinColumn(name = "color_id")
+    private Color color;
+
     private int year;
     
     /**
@@ -32,7 +36,7 @@ public class Car {
     private Calendar calendar;
     
 
-    public static Car of(String number, String mark, String color, int year) {
+    public static Car of(String number, String mark, Color color, int year) {
         Car car = new Car();
         car.number = number;
         car.mark = mark;

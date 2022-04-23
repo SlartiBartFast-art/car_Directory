@@ -10,9 +10,9 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 import java.util.Optional;
 
-public interface CarRepositoryImpl extends JpaRepository<Car, Integer> {
+public interface CarRepositoryImpl extends JpaRepository<Car, Long> {
     
-    boolean existsById(int id);
+    boolean existsById(Long id);
     
     Page<Car> findAll(Pageable pageable, Sort sort);
     
