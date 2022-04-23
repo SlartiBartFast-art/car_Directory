@@ -37,7 +37,7 @@ public class CarController {
      *
      * @return List<Car>
      */
-    @GetMapping
+    @GetMapping("/")
     public List<Car> findAll() {
         return carService.findAllByOrder();
     }
@@ -67,8 +67,9 @@ public class CarController {
      * @param car Object Car
      * @return ResponseEntity<Car>
      */
-    @PostMapping
+    @PostMapping("/")
     public ResponseEntity<Car> add(@Valid @RequestBody CarDto car) {
+        System.out.println("-> " + car);
         var rsl = carService.save(modelMapper.map(car, Car.class));
         if (rsl.getId() == 0) {
             throw new ResponseStatusException(

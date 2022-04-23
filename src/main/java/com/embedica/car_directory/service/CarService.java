@@ -52,6 +52,12 @@ public class CarService {
      * @return car object
      */
     public Car save(Car car) {
+     var rslColor = colorRepository.findColorByColoring(car.getColor().getColoring());
+     if (rslColor.isPresent()) {
+         car.setColor(rslColor.get());
+         return carRepository.save(car);
+     }
+        car.setColor(colorRepository.save(car.getColor()));
         return carRepository.save(car);
     }
 
@@ -168,16 +174,16 @@ public class CarService {
         return carRepository.findCarByYearOrderByYear();
     }
 
-//+- В запросах нет возможности выбрать сортировку и постраничный вывод
+    //+- В запросах нет возможности выбрать сортировку и постраничный вывод
 //(сортировка в запросах жестко задана на уровне кода)
     public List<Car> findByRequestParam(Long id,
                                         String color,
                                         int year,
                                         String sort) {//Desc, Asc
-var idOpt = carRepository.findById(id);
-var colorOpt = carRepository.findAllByColor(color);
-var yearOpt = carRepository.findAllByYear(year);
-var sortOpr = sort;
+        var idOpt = carRepository.findById(id);
+        var colorOpt = carRepository.findAllByColor(color);
+        var yearOpt = carRepository.findAllByYear(year);
+        var sortOpr = sort;
 
         return null;
     }

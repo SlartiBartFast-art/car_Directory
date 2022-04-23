@@ -16,8 +16,8 @@ public class CarDto {
     private String number;
     @NotBlank(message = "Mark must be not empty")
     private String mark;
-    @NotBlank(message = "Color must be not empty")
-    private String color;
+
+    private ColorDto color;
     @Min(value = 1890, message = "Year must be more than 1890")
     private int year;
     

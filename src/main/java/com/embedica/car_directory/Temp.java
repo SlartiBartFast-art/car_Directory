@@ -3,6 +3,7 @@ package com.embedica.car_directory;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -23,5 +24,7 @@ public class Temp {
         System.out.println("CALENDAR  " + calendar.getTime());
 String rsl = "Last Date " + calendar.getTime();
         System.out.println(rsl);
+        LocalDateTime localDateTime = LocalDateTime.now();
+        System.out.println("LocalDaT " + localDateTime);
     }
 }
