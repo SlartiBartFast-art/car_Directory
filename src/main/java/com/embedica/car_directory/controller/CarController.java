@@ -44,9 +44,9 @@ public class CarController {
     
 /*    // https://www.baeldung.com/jpa-and-or-criteria-predicates
     @GetMapping // ?di=...&color=...
-    public List<Car> findAll(@RequestParam String id,
+    public List<Car> findAll(@RequestParam Long id,
                              @RequestParam String color,
-                             @RequestParam String year,
+                             @RequestParam int year,
                              @RequestParam String sort
     ) {
         val criteriaBuilder = entityManager.getCriteriaBuilder();
