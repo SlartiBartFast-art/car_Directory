@@ -1,7 +1,6 @@
 package com.embedica.car_directory.repository;
 
 import com.embedica.car_directory.model.Car;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 

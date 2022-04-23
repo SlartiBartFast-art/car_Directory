@@ -18,7 +18,7 @@ public interface CarRepositoryImpl extends JpaRepository<Car, Long>, CustomCarRe
 
     boolean existsById(Long id);
 
-    Page<Car> findAll(Pageable pageable, Sort sort);
+//    Page<Car> findAll(Pageable pageable, Sort sort);
 
     /**
      * Find exact match to Entity model parameters

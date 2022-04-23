@@ -37,8 +37,8 @@ public class CustomCarRepositoryImpl implements CustomCarRepository {
                 = criteriaBuilder.equal(carRoot.get("color"), "red");
         Predicate predicateForColor
                 = criteriaBuilder.or(predicateForBlueColor, predicateForRedColor);
-        if (id != null) criteriaBuilder.equal(carRoot.get("id"), id);
-        if (color != null) criteriaBuilder.equal(carRoot.get("color"), color);
+//        if (id != null) criteriaBuilder.equal(carRoot.get("id"), id);
+//        if (color != null) criteriaBuilder.equal(carRoot.get("color"), color);
 
         return entityManager.createQuery(criteriaQuery)
                 .getResultList();
