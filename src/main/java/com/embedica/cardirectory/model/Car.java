@@ -1,6 +1,5 @@
-package com.embedica.car_directory.model;
+package com.embedica.cardirectory.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

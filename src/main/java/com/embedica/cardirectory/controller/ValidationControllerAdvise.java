@@ -1,4 +1,4 @@
-package com.embedica.car_directory.controller;
+package com.embedica.cardirectory.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;

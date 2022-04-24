@@ -1,4 +1,4 @@
-package com.embedica.car_directory;
+package com.embedica.cardirectory;
 
 /**
  * TODO global: Универсальны метод GET с параметрами

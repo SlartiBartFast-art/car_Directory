@@ -1,9 +1,9 @@
-package com.embedica.car_directory.controller;
+package com.embedica.cardirectory.controller;
 
-import com.embedica.car_directory.model.Car;
-import com.embedica.car_directory.model.CarDto;
-import com.embedica.car_directory.model.Statistic;
-import com.embedica.car_directory.service.CarService;
+import com.embedica.cardirectory.model.Car;
+import com.embedica.cardirectory.model.CarDto;
+import com.embedica.cardirectory.model.Statistic;
+import com.embedica.cardirectory.service.CarService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -61,6 +61,21 @@ public class CarController {
     }*/
 
     /**
+     * The find by id Car object
+     *
+     * @return Car obj or null
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<Car> findById(@PathVariable Long id) {
+        var rsl = carService.findById(id);
+        return rsl.map(car -> new ResponseEntity<>(car,
+                HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(
+                        Car.of(null, null, null, 0),
+                        HttpStatus.NOT_FOUND));
+    }
+
+    /**
      * Добавление автомобиля
      * Результат операции (успех, ошибка, объект уже существует)
      *
@@ -68,7 +83,7 @@ public class CarController {
      * @return ResponseEntity<Car>
      */
     @PostMapping("/")
-    public ResponseEntity<Car> add(@Valid @RequestBody CarDto car) {
+    public ResponseEntity<Car> save(@Valid @RequestBody CarDto car) {
         System.out.println("-> " + car);
         var rsl = carService.save(modelMapper.map(car, Car.class));
         if (rsl.getId() == 0) {
@@ -79,7 +94,7 @@ public class CarController {
         }
         return new ResponseEntity<>(
                 rsl,
-                HttpStatus.OK
+                HttpStatus.CREATED
         );
     }
 
@@ -100,6 +115,7 @@ public class CarController {
      *
      * @return calendar date
      */
+    //todo Optional.map
     @GetMapping("/firstDate")
     public ResponseEntity<Calendar> firstCarDate() {
         var rsl = carService.dateOfFirstEntry();

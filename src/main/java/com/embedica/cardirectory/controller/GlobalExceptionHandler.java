@@ -1,4 +1,4 @@
-package com.embedica.car_directory.controller;
+package com.embedica.cardirectory.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpStatus;

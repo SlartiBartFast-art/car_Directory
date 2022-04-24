@@ -1,16 +1,14 @@
-package com.embedica.car_directory.service;
+package com.embedica.cardirectory.service;
 
-import com.embedica.car_directory.model.Car;
-import com.embedica.car_directory.model.Statistic;
-import com.embedica.car_directory.repository.CarRepositoryImpl;
-import com.embedica.car_directory.repository.ColorRepositoryImpl;
+import com.embedica.cardirectory.model.Car;
+import com.embedica.cardirectory.model.Statistic;
+import com.embedica.cardirectory.repository.CarRepositoryImpl;
+import com.embedica.cardirectory.repository.ColorRepositoryImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 @RequiredArgsConstructor
@@ -45,6 +43,15 @@ public class CarService {
     }
 
     /**
+     * The find by id Car object
+     *
+     * @return Optional<Car>
+     */
+    public Optional<Car> findById(Long id) {
+        return carRepository.findById(id);
+    }
+
+    /**
      * Save object Car in to DB if him not exist
      * or update if exist
      *
@@ -52,11 +59,11 @@ public class CarService {
      * @return car object
      */
     public Car save(Car car) {
-     var rslColor = colorRepository.findColorByColoring(car.getColor().getColoring());
-     if (rslColor.isPresent()) {
-         car.setColor(rslColor.get());
-         return carRepository.save(car);
-     }
+        var rslColor = colorRepository.findColorByColoring(car.getColor().getColoring());
+        if (rslColor.isPresent()) {
+            car.setColor(rslColor.get());
+            return carRepository.save(car);
+        }
         car.setColor(colorRepository.save(car.getColor()));
         return carRepository.save(car);
     }
@@ -116,7 +123,6 @@ public class CarService {
      * @return Statistic obj
      */
     public Statistic statistic() {
-
         var rsl = carRepository.count();
         if (rsl == 0) {
             return Statistic.of("Is empty!",
@@ -125,7 +131,6 @@ public class CarService {
                     "Is empty!"
             );
         }
-
         return Statistic.of("The total number of entries is: " +
                         rsl,
                 "The date Of First Entry: " + this.dateOfFirstEntry().getTime(),

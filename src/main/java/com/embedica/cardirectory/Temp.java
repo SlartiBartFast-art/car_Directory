@@ -1,4 +1,4 @@
-package com.embedica.car_directory;
+package com.embedica.cardirectory;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

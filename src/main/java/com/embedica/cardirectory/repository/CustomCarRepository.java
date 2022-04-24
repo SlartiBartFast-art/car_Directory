@@ -1,6 +1,6 @@
-package com.embedica.car_directory.repository;
+package com.embedica.cardirectory.repository;
 
-import com.embedica.car_directory.model.Car;
+import com.embedica.cardirectory.model.Car;
 
 import java.util.List;
 
