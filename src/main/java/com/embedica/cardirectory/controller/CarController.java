@@ -19,6 +19,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 
 @Validated
 @RestController
@@ -105,23 +106,27 @@ public class CarController {
      */
     @GetMapping("/lastDate")
     public ResponseEntity<Calendar> lastCarDate() {
-        Calendar rsl = carService.dateOfLastEntry();
-        return new ResponseEntity<>(rsl,
-                rsl != null ? HttpStatus.OK : HttpStatus.NOT_FOUND);
+        var rsl = Optional.of(carService.dateOfLastEntry());
+        return rsl.map(calendar -> new ResponseEntity<>(calendar,
+                HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(
+                        Calendar.getInstance(),
+                        HttpStatus.NOT_FOUND));
     }
 
     /**
      * The date first write Car object
      *
-     * @return calendar date
+     * @return ResponseEntity<Calendar> calendar date or current time
      */
-    //todo Optional.map
     @GetMapping("/firstDate")
     public ResponseEntity<Calendar> firstCarDate() {
-        var rsl = carService.dateOfFirstEntry();
-        return new ResponseEntity<>(rsl,
-                rsl != null ? HttpStatus.OK : HttpStatus.NOT_FOUND);
-
+        var rsl = Optional.of(carService.dateOfFirstEntry());
+        return rsl.map(calendar -> new ResponseEntity<>(calendar,
+                HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(
+                        Calendar.getInstance(),
+                        HttpStatus.NOT_FOUND));
     }
 
     /**

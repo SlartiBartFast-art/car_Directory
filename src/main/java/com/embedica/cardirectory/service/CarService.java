@@ -193,10 +193,4 @@ public class CarService {
         return null;
     }
 
-//    private List<Car> sortDEscA(String sort) {
-//        if (sort.equals(Desc)) {
-//            return carRepository.s
-//        }
-//        return
-//    }
 }

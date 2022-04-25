@@ -2,14 +2,15 @@ package com.embedica.cardirectory.repository;
 
 import com.embedica.cardirectory.model.Car;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-
+//public interface CarRepositoryImpl extends JpaRepository<Car, Long>, CustomCarRepository {
 @Repository
-public interface CarRepositoryImpl extends JpaRepository<Car, Long>, CustomCarRepository {
+public interface CarRepositoryImpl extends JpaRepository<Car, Long>, JpaSpecificationExecutor<Car> {
 
     boolean existsById(Long id);
 
