@@ -22,25 +22,25 @@ public class UserSpecificationsBuilder {
         return this;
     }
 
-    public Specification<Car> build() {
-        if (params.size() == 0) {
-            return null;
-        }
-
-        List<Specification> specs = params.stream()
-                .map(UserSpecification::new) //todo
-                .collect(Collectors.toList());
-
-        Specification result = specs.get(0);
-
-        for (int i = 1; i < params.size(); i++) {
-            result = params.get(i)
-                    .isOrPredicate() //todo
-                    ? Specification.where(result)
-                    .or(specs.get(i))
-                    : Specification.where(result)
-                    .and(specs.get(i));
-        }
-        return result;
-    }
+//    public Specification<Car> build() {
+//        if (params.size() == 0) {
+//            return null;
+//        }
+//
+//        List<Specification> specs = params.stream()
+//                .map(UserSpecification::new) //todo
+//                .collect(Collectors.toList());
+//
+//        Specification result = specs.get(0);
+//
+//        for (int i = 1; i < params.size(); i++) {
+//            result = params.get(i)
+//                    .isOrPredicate() //todo
+//                    ? Specification.where(result)
+//                    .or(specs.get(i))
+//                    : Specification.where(result)
+//                    .and(specs.get(i));
+//        }
+//        return result;
+//    }
 }

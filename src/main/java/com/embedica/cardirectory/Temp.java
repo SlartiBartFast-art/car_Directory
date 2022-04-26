@@ -7,9 +7,7 @@ import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
-
 public class Temp {
-
 
     public static void main(String[] args) throws ParseException {
         Calendar calendar = Calendar.getInstance();

@@ -90,7 +90,6 @@ public class CarService {
         return car.map(Car::getId).orElse(null);
     }
 
-
     /**
      * Find date when was created first entity
      *
@@ -131,11 +130,14 @@ public class CarService {
                     "Is empty!"
             );
         }
-        return Statistic.of("The total number of entries is: " +
-                        rsl,
-                "The date Of First Entry: " + this.dateOfFirstEntry().getTime(),
-                "The date Of Last Entry: " + this.dateOfLastEntry().getTime(),
-                "The Id Of Last Entity: " + this.findIdLastEntity()
+        return Statistic.of("The total number of entries is: "
+                        + rsl,
+                "The date Of First Entry: "
+                        + this.dateOfFirstEntry().getTime(),
+                "The date Of Last Entry: "
+                        + this.dateOfLastEntry().getTime(),
+                "The Id Of Last Entity: "
+                        + this.findIdLastEntity()
         );
     }
 
@@ -181,16 +183,16 @@ public class CarService {
 
     //+- В запросах нет возможности выбрать сортировку и постраничный вывод
 //(сортировка в запросах жестко задана на уровне кода)
-    public List<Car> findByRequestParam(Long id,
-                                        String color,
-                                        int year,
-                                        String sort) {//Desc, Asc
-        var idOpt = carRepository.findById(id);
-        var colorOpt = carRepository.findAllByColor(color);
-        var yearOpt = carRepository.findAllByYear(year);
-        var sortOpr = sort;
-
-        return null;
-    }
+//    public List<Car> findByRequestParam(Long id,
+//                                        String color,
+//                                        int year,
+//                                        String sort) {//Desc, Asc
+//        var idOpt = carRepository.findById(id);
+//        var colorOpt = carRepository.findAllByColor(color);
+//        var yearOpt = carRepository.findAllByYear(year);
+//        var sortOpr = sort;
+//
+//        return null;
+//    }
 
 }

@@ -25,21 +25,24 @@ Used technologies
 ______________________________________________
 - Java Core
 - Rest API
-- Spring Boot Data JPA
+- Spring Boot (Data JPA, Web)
 - Maven
-- PostgreSQL (DB)  
+- PostgreSQL (DB) 
+- Docker
+- Postman
 - Travis C.I.
+
 
 Кратко о методах:
 
 ![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_2.jpg)
 
-- /all
+- /
 Получить список всех сущностей хранимых в БД
   
   ![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_3.jpg)
  
-- /income
+- /
 Добавление автомобиля(сущности) в БД
   
   ![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_4.jpg)
@@ -105,8 +108,13 @@ after
 ![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_6.jpg)
 
   
-- /stcCount
-Статистика от БД, общее количество хранимых на данный момент сущностей
+- /statistics
+Статистика от БД,
+  
+общая информация(
+  количество хранимых на данный момент сущностей,
+  дата первой записи в БД, 
+  дата последней записи в БД)
   
 ![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_7.jpg)
   

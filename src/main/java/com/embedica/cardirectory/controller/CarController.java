@@ -64,7 +64,7 @@ public class CarController {
     /**
      * The find by id Car object
      *
-     * @return Car obj or null
+     * @return ResponseEntity<Car> Car obj or null
      */
     @GetMapping("/{id}")
     public ResponseEntity<Car> findById(@PathVariable Long id) {
@@ -72,31 +72,8 @@ public class CarController {
         return rsl.map(car -> new ResponseEntity<>(car,
                 HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(
-                        Car.of(null, null, null, 0),
+                        new Car(),
                         HttpStatus.NOT_FOUND));
-    }
-
-    /**
-     * Добавление автомобиля
-     * Результат операции (успех, ошибка, объект уже существует)
-     *
-     * @param car Object Car
-     * @return ResponseEntity<Car>
-     */
-    @PostMapping("/")
-    public ResponseEntity<Car> save(@Valid @RequestBody CarDto car) {
-        System.out.println("-> " + car);
-        var rsl = carService.save(modelMapper.map(car, Car.class));
-        if (rsl.getId() == 0) {
-            throw new ResponseStatusException(
-                    HttpStatus.INTERNAL_SERVER_ERROR,
-                    "We're sorry, server error, please try again later!"
-            );
-        }
-        return new ResponseEntity<>(
-                rsl,
-                HttpStatus.CREATED
-        );
     }
 
     /**
@@ -130,40 +107,12 @@ public class CarController {
     }
 
     /**
-     * The remove Car object by Id
-     *
-     * @param id Car object
-     * @return HTTP status code and if the operation was successful Automotive object
-     */
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable("id") @Min(1) Long id) {
-        if (id > carService.findIdLastEntity()) {
-            throw new IllegalArgumentException(
-                    "The object id must be correct, object like this id don't exist!");
-        }
-        return new ResponseEntity<>(
-                carService.deleteById(id) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
-    }
-
-    /**
-     * Database statistics
-     *
-     * @return Statistic object
-     */
-    @GetMapping("/statistics")
-    public ResponseEntity<Statistic> statistics() {
-        return new ResponseEntity<>(carService.statistic(), HttpStatus.OK);
-    }
-
-
-    /**
      * Getting a list of entities from the database,
      * by the specified parameter (color)
      *
      * @param color object
      * @return List<Car>
      */
-
     @GetMapping("/fndByColor/{color}")
     public List<Car> findAllByColor(@PathVariable("color") String color) {
         if (carService.matches(color)) {
@@ -205,5 +154,73 @@ public class CarController {
     @GetMapping("/orderByYear")
     public List<Car> orderAllByYear() {
         return this.carService.orderByYear();
+    }
+
+    /**
+     * Database statistics
+     *
+     * @return Statistic object
+     */
+    @GetMapping("/statistics")
+    public ResponseEntity<Statistic> statistics() {
+        return new ResponseEntity<>(carService.statistic(), HttpStatus.OK);
+    }
+
+    /**
+     * Добавление автомобиля
+     * Результат операции (успех, ошибка, объект уже существует)
+     *
+     * @param car Object Car
+     * @return ResponseEntity<Car>
+     */
+    @PostMapping("/")
+    public ResponseEntity<Car> save(@Valid @RequestBody CarDto car) {
+        System.out.println("-> " + car);
+        var rsl = carService.save(modelMapper.map(car, Car.class));
+        if (rsl.getId() == 0) {
+            throw new ResponseStatusException(
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    "We're sorry, server error, please try again later!"
+            );
+        }
+        return new ResponseEntity<>(
+                rsl,
+                HttpStatus.CREATED
+        );
+    }
+
+    /**
+     * update Car obj
+     *
+     * @param car Car object
+     * @return ResponseEntity<Void>
+     */
+    @PutMapping("/")
+    public ResponseEntity<Void> update(@Valid @RequestBody CarDto car) {
+        System.out.println("-> " + car);
+        var rsl = carService.save(modelMapper.map(car, Car.class));
+        if (rsl.getId() == 0) {
+            throw new ResponseStatusException(
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    "We're sorry, server error, please try again later!"
+            );
+        }
+        return ResponseEntity.ok().build();
+    }
+
+    /**
+     * The remove Car object by Id
+     *
+     * @param id Car object
+     * @return HTTP status code and if the operation was successful Automotive object
+     */
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable("id") @Min(1) Long id) {
+        if (id > carService.findIdLastEntity()) {
+            throw new IllegalArgumentException(
+                    "The object id must be correct, object like this id don't exist!");
+        }
+        return new ResponseEntity<>(
+                carService.deleteById(id) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
 }

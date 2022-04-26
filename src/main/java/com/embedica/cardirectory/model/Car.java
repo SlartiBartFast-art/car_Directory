@@ -36,12 +36,12 @@ public class Car {
         this.setCalendar(Calendar.getInstance());
         this.setModified(Calendar.getInstance());
     }
+
     @PreUpdate
     void onUpdate() {
         this.setModified(Calendar.getInstance());
     }
     
-
     public static Car of(String number, String mark, Color color, int year) {
         Car car = new Car();
         car.number = number;

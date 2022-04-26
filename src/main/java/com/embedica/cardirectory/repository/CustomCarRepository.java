@@ -8,5 +8,5 @@ public interface CustomCarRepository {
 
     Car customFindMethod(Long id);
 
-    List<Car> findByRequestParamCustom (String id, String color, String year, String sort);
+    List<Car> findByRequestParamCustom(String id, String color, String year, String sort);
 }
