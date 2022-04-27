@@ -8,13 +8,11 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-//public interface CarRepositoryImpl extends JpaRepository<Car, Long>, CustomCarRepository {
+
 @Repository
 public interface CarRepositoryImpl extends JpaRepository<Car, Long>, JpaSpecificationExecutor<Car> {
 
     boolean existsById(Long id);
-
-//    Page<Car> findAll(Pageable pageable, Sort sort);
 
     /**
      * Find exact match to Entity model parameters

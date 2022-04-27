@@ -29,9 +29,6 @@ public class CarController {
 
     private final CarService carService;
     private final ModelMapper modelMapper;
-    @PersistenceContext
-    private final EntityManager entityManager;
-
 
     /**
      * The getting a list of all records
@@ -42,24 +39,6 @@ public class CarController {
     public List<Car> findAll() {
         return carService.findAllByOrder();
     }
-    
-/*    // https://www.baeldung.com/jpa-and-or-criteria-predicates
-    @GetMapping // ?di=...&color=...
-    public List<Car> findAll(@RequestParam Long id,
-                             @RequestParam String color,
-                             @RequestParam int year,
-                             @RequestParam String sort
-    ) {
-        val criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Car> criteriaQuery = criteriaBuilder.createQuery(Car.class);
-        Root<Car> itemRoot = criteriaQuery.from(Car.class);
-        
-        // where car.id = {id} AND car.color = {color}
-        if (id != null) criteriaBuilder.equal(itemRoot.get("id"), id);
-        if (color != null) criteriaBuilder.equal(itemRoot.get("color"), color);
-        
-        return entityManager.createQuery(criteriaQuery).getResultList();
-    }*/
 
     /**
      * The find by id Car object
