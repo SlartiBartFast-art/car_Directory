@@ -24,7 +24,7 @@ import java.util.Objects;
 class PostControlTest {
 
     @Test
-    public void givenСarDtoWhenGetCar() {
+    public void whenAddCar() {
         ColorDto color = new ColorDto(1L, "Black");
         CarDto carDto = new CarDto(1, "A587BA177Rus", "DODGE CHALLENGER GR500", color, 2017);
         carDto.setMark("Buik");
@@ -37,7 +37,7 @@ class PostControlTest {
     }
 
     @Test
-    public void givenСarDtoWhenDelete() {
+    public void whenCreateThanDelete() {
         ColorDto color = new ColorDto(1L, "Black");
         CarDto carDto = new CarDto(1, "A587BA177Rus", "DODGE CHALLENGER GR500", color, 2017);
         carDto.setMark("Buik");
