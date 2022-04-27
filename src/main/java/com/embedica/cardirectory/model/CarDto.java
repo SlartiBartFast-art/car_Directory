@@ -23,10 +23,7 @@ public class CarDto {
     @Min(value = 1890, message = "Year must be more than 1890")
     private int year;
     
-   // private Calendar calendar;
-
-
-    public static CarDto of(String number, String mark, ColorDto color, int year) {
+      public static CarDto of(String number, String mark, ColorDto color, int year) {
         CarDto carDto = new CarDto();
         carDto.number = number;
         carDto.mark = mark;

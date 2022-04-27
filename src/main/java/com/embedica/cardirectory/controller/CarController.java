@@ -12,8 +12,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -154,7 +152,6 @@ public class CarController {
      */
     @PostMapping("/")
     public ResponseEntity<Car> save(@Valid @RequestBody CarDto car) {
-        System.out.println("-> " + car);
         var rsl = carService.save(modelMapper.map(car, Car.class));
         if (rsl.getId() == 0) {
             throw new ResponseStatusException(
@@ -176,7 +173,6 @@ public class CarController {
      */
     @PutMapping("/")
     public ResponseEntity<Void> update(@Valid @RequestBody CarDto car) {
-        System.out.println("-> " + car);
         var rsl = carService.save(modelMapper.map(car, Car.class));
         if (rsl.getId() == 0) {
             throw new ResponseStatusException(
