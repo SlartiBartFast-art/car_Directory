@@ -1,5 +1,6 @@
 package com.embedica.cardirectory.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +10,7 @@ import java.util.Calendar;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class CarDto {
     
     private int id;
@@ -21,5 +23,15 @@ public class CarDto {
     @Min(value = 1890, message = "Year must be more than 1890")
     private int year;
     
-    private Calendar calendar;
+   // private Calendar calendar;
+
+
+    public static CarDto of(String number, String mark, ColorDto color, int year) {
+        CarDto carDto = new CarDto();
+        carDto.number = number;
+        carDto.mark = mark;
+        carDto.color = color;
+        carDto.year = year;
+        return carDto;
+    }
 }
