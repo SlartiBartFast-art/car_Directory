@@ -44,7 +44,6 @@ class PostControlTest {
                 postForEntity(apiId,
                         carDto, Car.class);
 
-
         ResponseEntity<Car> response = testRestTemplate.
                 getForEntity(apiId + "1", Car.class);
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
