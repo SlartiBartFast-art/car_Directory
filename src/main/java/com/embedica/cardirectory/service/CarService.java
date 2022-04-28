@@ -181,18 +181,4 @@ public class CarService {
         return carRepository.findCarByYearOrderByYear();
     }
 
-    //+- В запросах нет возможности выбрать сортировку и постраничный вывод
-//(сортировка в запросах жестко задана на уровне кода)
-//    public List<Car> findByRequestParam(Long id,
-//                                        String color,
-//                                        int year,
-//                                        String sort) {//Desc, Asc
-//        var idOpt = carRepository.findById(id);
-//        var colorOpt = carRepository.findAllByColor(color);
-//        var yearOpt = carRepository.findAllByYear(year);
-//        var sortOpr = sort;
-//
-//        return null;
-//    }
-
 }
