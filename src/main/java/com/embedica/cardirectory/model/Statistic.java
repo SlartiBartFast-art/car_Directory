@@ -8,11 +8,8 @@ import lombok.NoArgsConstructor;
 public class Statistic {
 
     private String count;
-
     private String firstWriteDate;
-
     private String lastWriteDate;
-
     private String idLastEntry;
 
     public static Statistic of(String count,

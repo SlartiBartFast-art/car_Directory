@@ -12,6 +12,7 @@ import javax.persistence.criteria.Root;
 
 @Data
 @NoArgsConstructor
+@Deprecated // не используется вообще нигде
 public class UserSpecification implements Specification<Car> {
 
     private SearchCriteria criteria;

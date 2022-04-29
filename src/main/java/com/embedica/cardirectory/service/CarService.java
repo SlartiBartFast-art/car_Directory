@@ -15,7 +15,6 @@ import java.util.*;
 public class CarService {
 
     private final CarRepositoryImpl carRepository;
-
     private final ColorRepositoryImpl colorRepository;
 
     /**
@@ -26,11 +25,6 @@ public class CarService {
      */
     public boolean matches(String color) {
         return colorRepository.existsColorByColoring(color);
-    }
-
-    //todo
-    public boolean contains(Long id) {
-        return carRepository.existsById(id);
     }
 
     /**
@@ -59,6 +53,7 @@ public class CarService {
      * @return car object
      */
     public Car save(Car car) {
+        // todo - выглядит Мудрёно, можно по-проще
         var rslColor = colorRepository.findColorByColoring(car.getColor().getColoring());
         if (rslColor.isPresent()) {
             car.setColor(rslColor.get());
@@ -97,7 +92,7 @@ public class CarService {
      */
     public Calendar dateOfFirstEntry() {
         var car = carRepository.findFirstByOrderByCalendarAsc();
-        System.out.println("dateOfFirstEntry( -> " + car.get());
+        System.out.println("dateOfFirstEntry( -> " + car.get()); // todo - а что если Упадём в NPE? Не порядок
         return car.map(Car::getCalendar).orElse(null);
     }
 
@@ -108,13 +103,16 @@ public class CarService {
      * @return boolean if present or false if Car object not exist
      */
     public boolean deleteById(Long id) {
-        var rslOptional = carRepository.findById(id);
-        if (rslOptional.isPresent()) {
-            carRepository.deleteById(id);
-            return true;
-        }
-
-        return false;
+        // todo - глянуть почему можно так: https://stackoverflow.com/questions/43641145/jparepository-delete-method-inform-that-entity-does-not-exist
+        return carRepository.removeById(id);
+        
+//        var rslOptional = carRepository.findById(id);
+//        if (rslOptional.isPresent()) {
+//            carRepository.deleteById(id);
+//            return true;
+//        }
+//
+//        return false;
     }
 
     /**
@@ -125,21 +123,15 @@ public class CarService {
     public Statistic statistic() {
         var rsl = carRepository.count();
         if (rsl == 0) {
-            return Statistic.of("Is empty!",
-                    "Is empty!",
-                    "Is empty!",
-                    "Is empty!"
-            );
+            return Statistic.of("Is empty!", // todo - это magic value - стоит вынести в Константу.
+                    "Is empty!",        // или как я упоминал, можно сделать по аналогии: Statistic.EMPTY
+                    "Is empty!",        // и все эти поля указать там.
+                    "Is empty!");
         }
-        return Statistic.of("The total number of entries is: "
-                        + rsl,
-                "The date Of First Entry: "
-                        + this.dateOfFirstEntry().getTime(),
-                "The date Of Last Entry: "
-                        + this.dateOfLastEntry().getTime(),
-                "The Id Of Last Entity: "
-                        + this.findIdLastEntity()
-        );
+        return Statistic.of("The total number of entries is: " + rsl,
+                "The date Of First Entry: " + this.dateOfFirstEntry().getTime(),
+                "The date Of Last Entry: " + this.dateOfLastEntry().getTime(),
+                "The Id Of Last Entity: " + this.findIdLastEntity());
     }
 
     /**

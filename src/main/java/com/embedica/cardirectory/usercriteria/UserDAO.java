@@ -22,18 +22,16 @@ public class UserDAO implements IUserDao {
     public List<Car> searchUser(List<SearchCriteria> params) {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Car> query = builder.createQuery(Car.class);
-        Root r = query.from(Car.class);
+        Root<Car> r = query.from(Car.class);
 
         Predicate predicate = builder.conjunction();
 
         UserSearchQueryCriteriaConsumer searchConsumer =
                 new UserSearchQueryCriteriaConsumer(predicate, builder, r);
-        params.stream().forEach(searchConsumer);
-        predicate = searchConsumer.getPredicate();
-        query.where(predicate);
-
-        var result = entityManager.createQuery(query).getResultList();
-        return result;
+        params.forEach(searchConsumer);
+        query.where(searchConsumer.getPredicate());
+    
+        return entityManager.createQuery(query).getResultList();
     }
 
     @Override
