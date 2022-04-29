@@ -97,6 +97,7 @@ public class CarService {
      */
     public Calendar dateOfFirstEntry() {
         var car = carRepository.findFirstByOrderByCalendarAsc();
+        System.out.println("dateOfFirstEntry( -> " + car.get());
         return car.map(Car::getCalendar).orElse(null);
     }
 

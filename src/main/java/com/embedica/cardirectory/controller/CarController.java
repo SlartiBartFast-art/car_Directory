@@ -90,9 +90,9 @@ public class CarController {
      * @param color object
      * @return List<Car>
      */
-    @GetMapping("/fndByColor/{color}")
+    @GetMapping("/findByColor/{color}")
     public List<Car> findAllByColor(@PathVariable("color") String color) {
-        if (carService.matches(color)) {
+        if (!carService.matches(color)) {
             throw new IllegalArgumentException(
                     "The color object must be correct!");
         }
