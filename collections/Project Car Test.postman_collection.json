@@ -1,0 +1,293 @@
+{
+	"info": {
+		"_postman_id": "c70cd74e-ad63-4451-923f-40a0c6b784ff",
+		"name": "Project Car Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/car/9",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/car/9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"car",
+						"9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/user/?search=number:B117AT155Rus",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/user/?search=mark:Ford,year>2015",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						""
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": "mark:Ford,year>2015"
+						}
+					]
+				},
+				"description": "search number"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/user/?search=mark:Ford,year>2015",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/user/?search=mark:Ford,year>2015",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						""
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": "mark:Ford,year>2015"
+						}
+					]
+				},
+				"description": "search mark and yaer"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/car/",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/car/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"car",
+						""
+					]
+				},
+				"description": "all cars list"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/car/",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"id\": 0,\r\n        \"number\": \"T951RE56Rus\",\r\n        \"mark\": \"Linkoln Navigator\",\r\n        \"color\": {\r\n            \"id\": 1,\r\n            \"coloring\": \"Black\"\r\n        },\r\n        \"year\": 2015\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/car/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"car",
+						""
+					]
+				},
+				"description": "POST save new entity "
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/car/findByColor/Blue",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/car/findByYearAndColor?year=2017&color=Black",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"car",
+						"findByYearAndColor"
+					],
+					"query": [
+						{
+							"key": "year",
+							"value": "2017"
+						},
+						{
+							"key": "color",
+							"value": "Black"
+						}
+					]
+				},
+				"description": "find entiry by color"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/car/findByMoreThanYear/2017",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/car/findByMoreThanYear/2017",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"car",
+						"findByMoreThanYear",
+						"2017"
+					]
+				},
+				"description": "find By More Than Year"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/car/findByYearAndColor?year=2017&color=Black",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/car/findByYearAndColor?year=2017&color=Black",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"car",
+						"findByYearAndColor"
+					],
+					"query": [
+						{
+							"key": "year",
+							"value": "2017"
+						},
+						{
+							"key": "color",
+							"value": "Black"
+						}
+					]
+				},
+				"description": "find By Year And Color"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/car/orderByYear",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/car/orderByYear",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"car",
+						"orderByYear"
+					]
+				},
+				"description": "geting order By Year sort"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/car/firstDate",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/car/firstDate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"car",
+						"firstDate"
+					]
+				},
+				"description": "fins forst entry entity "
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/car/lastDate",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/car/lastDate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"car",
+						"lastDate"
+					]
+				},
+				"description": "last date entry entity\r\n"
+			},
+			"response": []
+		}
+	]
+}
