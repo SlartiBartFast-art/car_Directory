@@ -114,6 +114,10 @@ after
 ![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_16.jpg)
 
 /user/?search= 
+
+Простой пользовательский запрос
+![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_19.jpg)
+
 Сложный пользовательский запрос, с произвольной комбинацией
 ![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_17.jpg)
 

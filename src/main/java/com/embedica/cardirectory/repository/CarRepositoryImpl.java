@@ -11,8 +11,6 @@ import java.util.Optional;
 
 @Repository
 public interface CarRepositoryImpl extends JpaRepository<Car, Long>, JpaSpecificationExecutor<Car> {
- 
-   boolean removeById(Long id);
 
     /**
      * Find exact match to Entity model parameters
@@ -29,6 +27,7 @@ public interface CarRepositoryImpl extends JpaRepository<Car, Long>, JpaSpecific
     /**
      * Find using color parameter
      * найти по цвету
+     *
      * @param colorId color Car entiry
      * @return List<Car>
      */
