@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
+// todo - если это нужно Только тебе, то есть .gitignore
 public class Temp {
 
     public static void main(String[] args) throws ParseException {

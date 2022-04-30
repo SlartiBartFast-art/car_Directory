@@ -11,8 +11,8 @@ import java.util.Optional;
 
 @Repository
 public interface CarRepositoryImpl extends JpaRepository<Car, Long>, JpaSpecificationExecutor<Car> {
-
-    boolean existsById(Long id);
+ 
+   boolean removeById(Long id);
 
     /**
      * Find exact match to Entity model parameters
