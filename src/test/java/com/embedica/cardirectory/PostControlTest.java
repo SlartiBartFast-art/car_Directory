@@ -77,12 +77,12 @@ class PostControlTest {
         ResponseEntity<Car> response3 = testRestTemplate.
                 getForEntity(apiId + "2",
                         Car.class);
-        var carList = testRestTemplate.exchange(
+      /*  var carList = testRestTemplate.exchange(
                 apiId,
                 HttpMethod.GET, null, new ParameterizedTypeReference<List<Car>>() {
                 }
         ).getBody();
-        System.out.println("RETU -> " + carList);
+        System.out.println("RETU -> " + carList);*/
         Assertions.assertEquals(HttpStatus.NOT_FOUND, response3.getStatusCode());
     }
 

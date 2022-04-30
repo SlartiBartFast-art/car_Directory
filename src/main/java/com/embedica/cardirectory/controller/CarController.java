@@ -84,9 +84,9 @@ public class CarController {
      */
     @GetMapping("/findByColor/{color}")
     public List<Car> findAllByColor(@PathVariable("color") String color) {
-        if (!carService.matches(color))
+        if (!carService.matches(color)) {
             throw new IllegalArgumentException("The color object must be correct!");
-
+        }
         return this.carService.findUsingColor(color);
     }
 
@@ -144,11 +144,11 @@ public class CarController {
     @PostMapping("/")
     public ResponseEntity<Car> save(@Valid @RequestBody CarDto car) {
         var rsl = carService.save(modelMapper.map(car, Car.class));
-        if (rsl.getId() == 0)
+        if (rsl.getId() == 0) {
             throw new ResponseStatusException(
                     INTERNAL_SERVER_ERROR,
                     "We're sorry, server error, please try again later!");
-
+        }
         return new ResponseEntity<>(rsl, CREATED);
     }
 
@@ -161,11 +161,11 @@ public class CarController {
     @PutMapping("/")
     public ResponseEntity<Void> update(@Valid @RequestBody CarDto car) {
         var rsl = carService.save(modelMapper.map(car, Car.class));
-        if (rsl.getId() == 0)
+        if (rsl.getId() == 0) {
             throw new ResponseStatusException(
                     INTERNAL_SERVER_ERROR,
                     "We're sorry, server error, please try again later!");
-
+        }
         return ResponseEntity.ok().build();
     }
 
@@ -177,10 +177,10 @@ public class CarController {
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable("id") @Min(1) Long id) {
-        if (id > carService.findIdLastEntity())
+        if (id > carService.findIdLastEntity()) {
             throw new IllegalArgumentException(
                     "The object id must be correct, object like this id don't exist!");
-
+        }
         return new ResponseEntity<>(carService.deleteById(id) ? OK : NOT_FOUND);
     }
 }
