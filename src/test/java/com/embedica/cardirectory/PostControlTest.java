@@ -5,7 +5,6 @@ import com.embedica.cardirectory.model.CarDto;
 
 import com.embedica.cardirectory.model.ColorDto;
 
-import com.embedica.cardirectory.usercriteria.SearchCriteria;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -15,13 +14,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -91,14 +84,15 @@ class PostControlTest {
         String apiYear = "http://localhost:8080/car/";
         String apiId = "http://localhost:8080/car/findByMoreThanYear/";
 
-        ColorDto color = new ColorDto(1L, "Black");
-        CarDto carDto = new CarDto(1, "A587BA177Rus", "DODGE CHALLENGER GR500", color, 2017);
+        ColorDto color = new ColorDto(0L, "Black");
+        CarDto carDto = new CarDto(0, "A587BA177Rus", "DODGE CHALLENGER GR500", color, 2017);
 
         TestRestTemplate testRestTemplate = new TestRestTemplate();
         testRestTemplate.
                 postForEntity(apiYear,
                         carDto, Car.class);
-        var responseList = testRestTemplate.exchange(
+
+       var responseList = testRestTemplate.exchange(
                 apiId + 2016,
                 HttpMethod.GET, null, new ParameterizedTypeReference<List<Car>>() {
                 }
