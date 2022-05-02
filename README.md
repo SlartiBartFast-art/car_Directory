@@ -32,6 +32,9 @@ ______________________________________________
 - Postman
 - Travis C.I.
 
+Docker образ приложения, Вы можете скачать по ссылке:
+
+https://hub.docker.com/r/slartibartfastart/car-repository
 
 Кратко о методах:
 
