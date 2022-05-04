@@ -34,7 +34,13 @@ ______________________________________________
 
 Docker образ приложения, Вы можете скачать по ссылке:
 
-https://hub.docker.com/r/slartibartfastart/car-repository
+https://hub.docker.com/repository/docker/slartibartfastart/car-repository
+
+или
+
+To pull image from repository:
+
+docker pull slartibartfastart/car-repository:latest
 
 Кратко о методах:
 

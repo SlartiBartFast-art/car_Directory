@@ -14,7 +14,7 @@ services:
       - 5432:5432
     restart: always
   app:
-    image: 'car-directory:latest'
+    image: 'slartibartfastart/car-repository:latest'
     container_name: car-directory
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/shortcut
