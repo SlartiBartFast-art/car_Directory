@@ -6,7 +6,6 @@ import com.embedica.cardirectory.model.Statistic;
 import com.embedica.cardirectory.service.CarService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +17,8 @@ import javax.validation.constraints.Min;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
+
+import static org.springframework.http.HttpStatus.*;
 
 @Validated
 @RestController
@@ -45,12 +46,9 @@ public class CarController {
      */
     @GetMapping("/{id}")
     public ResponseEntity<Car> findById(@PathVariable Long id) {
-        var rsl = carService.findById(id);
-        return rsl.map(car -> new ResponseEntity<>(car,
-                HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(
-                        new Car(),
-                        HttpStatus.NOT_FOUND));
+        return carService.findById(id)
+                .map(car -> new ResponseEntity<>(car, OK))
+                .orElseGet(() -> new ResponseEntity<>(new Car(), NOT_FOUND));
     }
 
     /**
@@ -61,11 +59,8 @@ public class CarController {
     @GetMapping("/lastDate")
     public ResponseEntity<Calendar> lastCarDate() {
         var rsl = Optional.of(carService.dateOfLastEntry());
-        return rsl.map(calendar -> new ResponseEntity<>(calendar,
-                HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(
-                        Calendar.getInstance(),
-                        HttpStatus.NOT_FOUND));
+        return rsl.map(calendar -> new ResponseEntity<>(calendar, OK))
+                .orElseGet(() -> new ResponseEntity<>(Calendar.getInstance(), NOT_FOUND));
     }
 
     /**
@@ -76,11 +71,8 @@ public class CarController {
     @GetMapping("/firstDate")
     public ResponseEntity<Calendar> firstCarDate() {
         var rsl = Optional.of(carService.dateOfFirstEntry());
-        return rsl.map(calendar -> new ResponseEntity<>(calendar,
-                HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(
-                        Calendar.getInstance(),
-                        HttpStatus.NOT_FOUND));
+        return rsl.map(calendar -> new ResponseEntity<>(calendar, OK))
+                .orElseGet(() -> new ResponseEntity<>(Calendar.getInstance(), NOT_FOUND));
     }
 
     /**
@@ -90,11 +82,10 @@ public class CarController {
      * @param color object
      * @return List<Car>
      */
-    @GetMapping("/fndByColor/{color}")
+    @GetMapping("/findByColor/{color}")
     public List<Car> findAllByColor(@PathVariable("color") String color) {
-        if (carService.matches(color)) {
-            throw new IllegalArgumentException(
-                    "The color object must be correct!");
+        if (!carService.matches(color)) {
+            throw new IllegalArgumentException("The color object must be correct!");
         }
         return this.carService.findUsingColor(color);
     }
@@ -140,7 +131,7 @@ public class CarController {
      */
     @GetMapping("/statistics")
     public ResponseEntity<Statistic> statistics() {
-        return new ResponseEntity<>(carService.statistic(), HttpStatus.OK);
+        return new ResponseEntity<>(carService.statistic(), OK);
     }
 
     /**
@@ -155,14 +146,10 @@ public class CarController {
         var rsl = carService.save(modelMapper.map(car, Car.class));
         if (rsl.getId() == 0) {
             throw new ResponseStatusException(
-                    HttpStatus.INTERNAL_SERVER_ERROR,
-                    "We're sorry, server error, please try again later!"
-            );
+                    INTERNAL_SERVER_ERROR,
+                    "We're sorry, server error, please try again later!");
         }
-        return new ResponseEntity<>(
-                rsl,
-                HttpStatus.CREATED
-        );
+        return new ResponseEntity<>(rsl, CREATED);
     }
 
     /**
@@ -176,9 +163,8 @@ public class CarController {
         var rsl = carService.save(modelMapper.map(car, Car.class));
         if (rsl.getId() == 0) {
             throw new ResponseStatusException(
-                    HttpStatus.INTERNAL_SERVER_ERROR,
-                    "We're sorry, server error, please try again later!"
-            );
+                    INTERNAL_SERVER_ERROR,
+                    "We're sorry, server error, please try again later!");
         }
         return ResponseEntity.ok().build();
     }
@@ -195,7 +181,6 @@ public class CarController {
             throw new IllegalArgumentException(
                     "The object id must be correct, object like this id don't exist!");
         }
-        return new ResponseEntity<>(
-                carService.deleteById(id) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(carService.deleteById(id) ? OK : NOT_FOUND);
     }
 }

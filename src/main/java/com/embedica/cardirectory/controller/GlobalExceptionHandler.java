@@ -1,6 +1,7 @@
 package com.embedica.cardirectory.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.val;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

@@ -15,7 +15,6 @@ import java.util.*;
 public class CarService {
 
     private final CarRepositoryImpl carRepository;
-
     private final ColorRepositoryImpl colorRepository;
 
     /**
@@ -26,11 +25,6 @@ public class CarService {
      */
     public boolean matches(String color) {
         return colorRepository.existsColorByColoring(color);
-    }
-
-    //todo
-    public boolean contains(Long id) {
-        return carRepository.existsById(id);
     }
 
     /**
@@ -112,7 +106,6 @@ public class CarService {
             carRepository.deleteById(id);
             return true;
         }
-
         return false;
     }
 
@@ -127,18 +120,12 @@ public class CarService {
             return Statistic.of("Is empty!",
                     "Is empty!",
                     "Is empty!",
-                    "Is empty!"
-            );
+                    "Is empty!");
         }
-        return Statistic.of("The total number of entries is: "
-                        + rsl,
-                "The date Of First Entry: "
-                        + this.dateOfFirstEntry().getTime(),
-                "The date Of Last Entry: "
-                        + this.dateOfLastEntry().getTime(),
-                "The Id Of Last Entity: "
-                        + this.findIdLastEntity()
-        );
+        return Statistic.of("The total number of entries is: " + rsl,
+                "The date Of First Entry: " + this.dateOfFirstEntry().getTime(),
+                "The date Of Last Entry: " + this.dateOfLastEntry().getTime(),
+                "The Id Of Last Entity: " + this.findIdLastEntity());
     }
 
     /**
@@ -180,19 +167,5 @@ public class CarService {
     public List<Car> orderByYear() {
         return carRepository.findCarByYearOrderByYear();
     }
-
-    //+- В запросах нет возможности выбрать сортировку и постраничный вывод
-//(сортировка в запросах жестко задана на уровне кода)
-//    public List<Car> findByRequestParam(Long id,
-//                                        String color,
-//                                        int year,
-//                                        String sort) {//Desc, Asc
-//        var idOpt = carRepository.findById(id);
-//        var colorOpt = carRepository.findAllByColor(color);
-//        var yearOpt = carRepository.findAllByYear(year);
-//        var sortOpr = sort;
-//
-//        return null;
-//    }
 
 }

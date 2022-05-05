@@ -1,5 +1,7 @@
 package com.embedica.cardirectory.usercriteria;
 
+import com.embedica.cardirectory.model.Car;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -10,23 +12,18 @@ import java.util.function.Consumer;
 
 @Data
 @RequiredArgsConstructor
+@AllArgsConstructor
 public class UserSearchQueryCriteriaConsumer implements Consumer<SearchCriteria> {
 
     private Predicate predicate;
     private CriteriaBuilder builder;
-    private Root r;
-
-    public UserSearchQueryCriteriaConsumer(Predicate predicate, CriteriaBuilder builder, Root r) {
-        this.predicate = predicate;
-        this.builder = builder;
-        this.r = r;
-    }
+    private Root<Car> r;
 
     @Override
     public void accept(SearchCriteria param) {
         if (param.getOperation().equalsIgnoreCase(">")) {
-            predicate = builder.and(predicate, builder
-                    .greaterThanOrEqualTo(r.get(param.getKey()), param.getValue().toString()));
+            predicate = builder.and(predicate, builder.greaterThanOrEqualTo(
+                    r.get(param.getKey()), param.getValue().toString()));
         } else if (param.getOperation().equalsIgnoreCase("<")) {
             predicate = builder.and(predicate, builder.lessThanOrEqualTo(
                     r.get(param.getKey()), param.getValue().toString()));

@@ -1,0 +1,8 @@
+2022-04-27 18:23:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Таблица "COLORS" не найдена
+Table "COLORS" not found; SQL statement:
+select color0_.id as id1_1_, color0_.coloring as coloring2_1_ from colors color0_ where color0_.coloring=? [42102-200]
+2022-04-27 18:26:46 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Таблица "COLORS" не найдена
+Table "COLORS" not found; SQL statement:
+select color0_.id as id1_1_, color0_.coloring as coloring2_1_ from colors color0_ where color0_.coloring=? [42102-200]

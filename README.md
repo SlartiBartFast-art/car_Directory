@@ -32,10 +32,19 @@ ______________________________________________
 - Postman
 - Travis C.I.
 
+Docker образ приложения, Вы можете скачать по ссылке:
+
+https://hub.docker.com/repository/docker/slartibartfastart/car-repository
+
+или
+
+To pull image from repository:
+
+docker pull slartibartfastart/car-repository:latest
 
 Кратко о методах:
 
-![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_2.jpg)
+![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_5.jpg)
 
 - /
 Получить список всех сущностей хранимых в БД
@@ -49,19 +58,19 @@ ______________________________________________
 
 after
 
-![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_5.jpg)
+![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_6.jpg)
 
 валидация
 
-![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_14.jpg)
+![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_7.jpg)
 
-- /fndByClr/{color}
+- /findByColor/{color}
 Получение списка сущностей из БД по указанному параметру(цвет)
   
 ![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_8.jpg)
 
 
-- /fndByClrAndYear
+- /findByYearAndColor
   Получение списка сущностей из БД используя параметры(год, цвет)
   
   ![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_9.jpg)
@@ -69,54 +78,59 @@ after
 валидация
 ![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_17.jpg)
 
-- /fndByMTYear/{year}
+- /findByMoreThanYear/{year}
   Получение списка сущностей из БД используя параметр (moreThan-больше чем)
   
   ![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_10.jpg)
 
 валидация
-![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_15.jpg)
-
-![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_16.jpg)
+![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_18.jpg)
 
 - /ordByYear
   Получение сущностей из БД отсортированных по годам в порядке возрастания
   
   ![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_11.jpg)
 
+- /firstDate
+  Дата первой записанной сущности в БД
+
+![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_12.jpg)
  
 - /lastDate
 Дата последней записанной сущности
   
-  ![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_12.jpg)
-
-
-- /firstDate
-Дата первой записанной сущности в БД
-
-![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_13.jpg)
-
+  ![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_13.jpg)
 
 - /{id}
   Удаление хранимой сущности из БД по ее id
   
 добавим:
 
-![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_18.jpg)
+![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_14.jpg)
 
-удалим:  
-![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_6.jpg)
+удалим:
+![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_15.jpg)
 
   
 - /statistics
 Статистика от БД,
   
-общая информация(
-  количество хранимых на данный момент сущностей,
+общая информация
+(количество хранимых на данный момент сущностей,
   дата первой записи в БД, 
   дата последней записи в БД)
   
-![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_7.jpg)
+![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_16.jpg)
+
+/user/?search= 
+
+Простой пользовательский запрос
+![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_19.jpg)
+
+Сложный пользовательский запрос, с произвольной комбинацией
+![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_17.jpg)
+
+В папке проекта collections Вы сможете найти готовую коллекцию запросов для работы в программе Postman 
   
 
 

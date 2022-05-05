@@ -12,8 +12,6 @@ import java.util.Optional;
 @Repository
 public interface CarRepositoryImpl extends JpaRepository<Car, Long>, JpaSpecificationExecutor<Car> {
 
-    boolean existsById(Long id);
-
     /**
      * Find exact match to Entity model parameters
      *
@@ -30,11 +28,11 @@ public interface CarRepositoryImpl extends JpaRepository<Car, Long>, JpaSpecific
      * Find using color parameter
      * найти по цвету
      *
-     * @param color Car obj
+     * @param colorId color Car entiry
      * @return List<Car>
      */
-    @Query("select u from Car as u where u.color = ?1")
-    List<Car> findAllByColor(String color);
+    @Query("select u from Car as u where u.color.coloring = ?1")
+    List<Car> findAllByColor(String colorId);
 
     /**
      * Find using color parameter and int year parameter
@@ -43,7 +41,7 @@ public interface CarRepositoryImpl extends JpaRepository<Car, Long>, JpaSpecific
      * @param year Car obj
      * @return List<Car>
      */
-    @Query("select u from Car as u where u.year = ?1 and u.color = ?2")
+    @Query("select u from Car as u where u.year = ?1 and u.color.coloring = ?2")
     List<Car> findAllByYearAndColor(int year, String color);
 
     /**
