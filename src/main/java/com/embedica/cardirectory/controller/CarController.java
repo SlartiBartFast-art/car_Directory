@@ -145,7 +145,7 @@ public class CarController {
 
     /**
      * Добавление автомобиля
-     * Результат операции (успех, ошибка, объект уже существует)
+     * Результат операции (успех, ошибка)
      *
      * @param car Object Car
      * @return ResponseEntity<Car>
