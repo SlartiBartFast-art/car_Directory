@@ -11,9 +11,9 @@ import java.util.Calendar;
  * модель, описывает абстракцию Автомобиль
  */
 @Data
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 public class Car {
     public static final Car EMPTY = new Car();
     

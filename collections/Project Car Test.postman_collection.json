@@ -288,6 +288,75 @@
 				"description": "last date entry entity\r\n"
 			},
 			"response": []
+		},
+		{
+			"name": "http://localhost:8080/car/cars?pageSize=2&pageNo=1&sortBy=id&sortDir=asc",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/car/cars?pageSize=2&pageNo=1&sortBy=id&sortDir=asc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"car",
+						"cars"
+					],
+					"query": [
+						{
+							"key": "pageSize",
+							"value": "2"
+						},
+						{
+							"key": "pageNo",
+							"value": "1"
+						},
+						{
+							"key": "sortBy",
+							"value": "id"
+						},
+						{
+							"key": "sortDir",
+							"value": "asc"
+						}
+					]
+				},
+				"description": "pageable pageSize=2&pageNo=1&sortBy=id&sortDir=asc"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/car/cars?pageSize=3&pageNo=1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/car/cars?pageSize=3&pageNo=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"car",
+						"cars"
+					],
+					"query": [
+						{
+							"key": "pageSize",
+							"value": "3"
+						},
+						{
+							"key": "pageNo",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

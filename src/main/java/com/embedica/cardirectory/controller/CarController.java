@@ -2,8 +2,10 @@ package com.embedica.cardirectory.controller;
 
 import com.embedica.cardirectory.model.Car;
 import com.embedica.cardirectory.model.CarDto;
+import com.embedica.cardirectory.model.CarResponse;
 import com.embedica.cardirectory.model.Statistic;
-import com.embedica.cardirectory.service.CarService;
+import com.embedica.cardirectory.service.CarServiceImpl;
+import com.embedica.cardirectory.utils.AppConstants;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +28,7 @@ import static org.springframework.http.HttpStatus.*;
 @RequiredArgsConstructor
 public class CarController {
 
-    private final CarService carService;
+    private final CarServiceImpl carService;
     private final ModelMapper modelMapper;
 
     /**
@@ -37,6 +39,28 @@ public class CarController {
     @GetMapping("/")
     public List<Car> findAll() {
         return carService.findAllByOrder();
+    }
+
+    /**
+     * Pagination and Sorting Example
+     * @param pageNo page number
+     * @param pageSize number of entities per page
+     * @param sortBy sort in ascending or descending order
+     * @param sortDir default as ascending
+     * @return CarResponse entity
+     */
+    @GetMapping("/cars")
+    public CarResponse getAllPosts(
+            @RequestParam(value = "pageNo",
+                    defaultValue = AppConstants.DEFAULT_PAGE_NUMBER, required = false) int pageNo,
+            @RequestParam(value = "pageSize",
+                    defaultValue = AppConstants.DEFAULT_PAGE_SIZE, required = false) int pageSize,
+            @RequestParam(value = "sortBy",
+                    defaultValue = AppConstants.DEFAULT_SORT_BY, required = false) String sortBy,
+            @RequestParam(value = "sortDir",
+                    defaultValue = AppConstants.DEFAULT_SORT_DIRECTION, required = false) String sortDir
+    ) {
+        return carService.getAllPosts(pageNo, pageSize, sortBy, sortDir);
     }
 
     /**
