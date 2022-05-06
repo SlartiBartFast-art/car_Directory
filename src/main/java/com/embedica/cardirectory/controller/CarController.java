@@ -207,4 +207,19 @@ public class CarController {
         }
         return new ResponseEntity<>(carService.deleteById(id) ? OK : NOT_FOUND);
     }
+
+    /**
+     * Delete all records that belong to that repository.
+     * The deleteAll() internally uses findAll() and delete() method
+     * @return void
+     */
+    @DeleteMapping("/all")
+    public ResponseEntity<Void> deleteAll() {
+        if (carService.findIdLastEntity() == 0) {
+            throw new IllegalArgumentException(
+                    "The objects don't exist! DB is empty");
+        }
+        carService.deleteAll();
+        return ResponseEntity.ok().build();
+    }
 }

@@ -204,4 +204,12 @@ public class CarServiceImpl implements CarService {
         carResponse.setLast(posts.isLast());
         return carResponse;
     }
+
+    /**
+     * Delete all records that belong to that repository.
+     * The deleteAll() internally uses findAll() and delete() method
+     */
+    public void deleteAll() {
+        carRepository.deleteAll();
+    }
 }

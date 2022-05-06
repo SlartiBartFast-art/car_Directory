@@ -1,9 +1,12 @@
 # “Справочник автомобилей”
 
 [![Build Status](https://app.travis-ci.com/SlartiBartFast-art/car_Directory.svg?branch=master)](https://app.travis-ci.com/SlartiBartFast-art/car_Directory)
+![GitHub top language](https://img.shields.io/github/languages/top/SlartiBartFast-art/car_Directory?logo=java&logoColor=red)
+![GitHub last commit](https://img.shields.io/github/last-commit/SlartiBartFast-art/car_Directory?logo=github)
+
 ____________________
 
-Реализовать сервис справочника автомобилей с хранением данных в базе или файле.
+Реализовать сервис справочника автомобилей с хранением данных в базе данных.
 
 Минимальная информация по объекту:
 
@@ -27,23 +30,38 @@ ______________________________________________
 - Java Core
 - Rest API
 - Spring Boot (Data JPA, Web)
-- Maven
+- Maven - Build Tool
 - PostgreSQL (DB)
 - Docker
-- Postman
+- Postman - Test REST API
 - Travis C.I.
 
 Docker образ приложения, Вы можете скачать по ссылке:
 
 https://hub.docker.com/repository/docker/slartibartfastart/car-repository
 
-или
-
-To pull image from repository:
+или To pull image from repository:
 
 docker pull slartibartfastart/car-repository:latest
 
-Кратко о методах:
+Краткая инструкция по использованию docker-compose
+создайте на вашем компьютере рабочую папку, расположение и имя выбираете сами
+для Windows: C:\projects\car_repository 
+для Linux:~coding/docker/car_repository
+скачайте файл docker-compose.yml, и положите в созданную вами папку
+https://github.com/SlartiBartFast-art/car_Directory/blob/deploy/src/main/docker/docker-compose.yml
+откройте окно терминала
+для Windows в текущей папке в строке пути введи cmd, нажмите Enter
+для Linux откройте окно терминала, и перейдите в созданную вами папку cd имя_папки
+
+Запустим: docker-compose up
+
+В вашем браузере создайте новое окно и введите - http://localhost:8080/car/
+далее вы можете пользоваться согласно имеющегося функционала ниже
+
+Завершим работу: docker-compose down
+
+Кратко о методах: 
 
 ![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_5.jpg)
 
