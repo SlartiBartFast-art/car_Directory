@@ -13,18 +13,6 @@ import java.util.Optional;
 public interface CarRepositoryImpl extends JpaRepository<Car, Long>, JpaSpecificationExecutor<Car> {
 
     /**
-     * Find exact match to Entity model parameters
-     *
-     * @param number Car obj
-     * @param mark   Car obj
-     * @param color  Car obj
-     * @param year   Car obj
-     * @return Optional<Car>
-     */
-    @Query("select u from Car as u where u.number = ?1 and u.mark = ?2 and u.color = ?3 and u.year = ?4")
-    Optional<Car> findCarByNumberAndMarkAndColorAndYear(String number, String mark, String color, int year);
-
-    /**
      * Find using color parameter
      * найти по цвету
      *

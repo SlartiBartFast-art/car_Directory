@@ -46,12 +46,19 @@ docker pull slartibartfastart/car-repository:latest
 
 Краткая инструкция по использованию docker-compose
 создайте на вашем компьютере рабочую папку, расположение и имя выбираете сами
+
 для Windows: C:\projects\car_repository 
-для Linux:~coding/docker/car_repository
-скачайте файл docker-compose.yml, и положите в созданную вами папку
+
+для Linux: ~coding/docker/car_repository
+
+Скачайте файл docker-compose.yml, и положите в созданную вами папку
+
 https://github.com/SlartiBartFast-art/car_Directory/blob/deploy/src/main/docker/docker-compose.yml
-откройте окно терминала
-для Windows в текущей папке в строке пути введи cmd, нажмите Enter
+
+откройте окно терминала:
+
+для Windows в текущей папке в строке пути введите cmd, нажмите Enter
+
 для Linux откройте окно терминала, и перейдите в созданную вами папку cd имя_папки
 
 Запустим: docker-compose up

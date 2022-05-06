@@ -108,8 +108,7 @@ public class CarServiceImpl implements CarService {
      * @return boolean if present or false if Car object not exist
      */
     public boolean deleteById(Long id) {
-        var rslOptional = carRepository.findById(id);
-        if (rslOptional.isPresent()) {
+        if (carRepository.existsById(id)) {
             carRepository.deleteById(id);
             return true;
         }
