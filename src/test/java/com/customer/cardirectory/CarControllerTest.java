@@ -18,7 +18,6 @@ import org.springframework.test.context.jdbc.Sql;
 import java.util.List;
 import java.util.Objects;
 
-
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 class CarControllerTest {
 
