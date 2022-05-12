@@ -1,4 +1,4 @@
-package com.embedica.cardirectory.utils;
+package com.customer.cardirectory.utils;
 
 public class AppConstants {
 

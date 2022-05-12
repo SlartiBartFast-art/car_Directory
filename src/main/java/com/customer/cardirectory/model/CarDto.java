@@ -1,4 +1,4 @@
-package com.embedica.cardirectory.model;
+package com.customer.cardirectory.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import java.util.Calendar;
 
 @Data
 @NoArgsConstructor

@@ -1,6 +1,6 @@
-package com.embedica.cardirectory.repository;
+package com.customer.cardirectory.repository;
 
-import com.embedica.cardirectory.model.Car;
+import com.customer.cardirectory.model.Car;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;

@@ -1,4 +1,4 @@
-package com.embedica.cardirectory;
+package com.customer.cardirectory;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;

@@ -1,6 +1,6 @@
-package com.embedica.cardirectory.usercriteria;
+package com.customer.cardirectory.usercriteria;
 
-import com.embedica.cardirectory.model.Car;
+import com.customer.cardirectory.model.Car;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;

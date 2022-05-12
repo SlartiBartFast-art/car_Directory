@@ -1,6 +1,6 @@
-package com.embedica.cardirectory.service;
+package com.customer.cardirectory.service;
 
-import com.embedica.cardirectory.model.CarResponse;
+import com.customer.cardirectory.model.CarResponse;
 
 public interface CarService {
 

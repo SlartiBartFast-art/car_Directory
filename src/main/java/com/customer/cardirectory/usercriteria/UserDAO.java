@@ -1,7 +1,6 @@
-package com.embedica.cardirectory.usercriteria;
+package com.customer.cardirectory.usercriteria;
 
-import com.embedica.cardirectory.model.Car;
-import com.embedica.cardirectory.usercriteria.SearchCriteria;
+import com.customer.cardirectory.model.Car;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

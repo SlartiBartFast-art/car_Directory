@@ -1,11 +1,10 @@
-package com.embedica.cardirectory.service;
+package com.customer.cardirectory.service;
 
-import com.embedica.cardirectory.model.Car;
-import com.embedica.cardirectory.model.CarDto;
-import com.embedica.cardirectory.model.CarResponse;
-import com.embedica.cardirectory.model.Statistic;
-import com.embedica.cardirectory.repository.CarRepositoryImpl;
-import com.embedica.cardirectory.repository.ColorRepositoryImpl;
+import com.customer.cardirectory.model.Statistic;
+import com.customer.cardirectory.repository.CarRepositoryImpl;
+import com.customer.cardirectory.repository.ColorRepositoryImpl;
+import com.customer.cardirectory.model.Car;
+import com.customer.cardirectory.model.CarResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -202,13 +201,5 @@ public class CarServiceImpl implements CarService {
         carResponse.setTotalPages(posts.getTotalPages());
         carResponse.setLast(posts.isLast());
         return carResponse;
-    }
-
-    /**
-     * Delete all records that belong to that repository.
-     * The deleteAll() internally uses findAll() and delete() method
-     */
-    public void deleteAll() {
-        carRepository.deleteAll();
     }
 }

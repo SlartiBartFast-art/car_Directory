@@ -1,4 +1,4 @@
-package com.embedica.cardirectory.controller;
+package com.customer.cardirectory.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.val;

@@ -1,8 +1,8 @@
-package com.embedica.cardirectory.controller;
+package com.customer.cardirectory.controller;
 
-import com.embedica.cardirectory.model.Car;
-import com.embedica.cardirectory.usercriteria.IUserDao;
-import com.embedica.cardirectory.usercriteria.SearchCriteria;
+import com.customer.cardirectory.usercriteria.IUserDao;
+import com.customer.cardirectory.usercriteria.SearchCriteria;
+import com.customer.cardirectory.model.Car;
 import lombok.AllArgsConstructor;
 
 import org.springframework.web.bind.annotation.GetMapping;

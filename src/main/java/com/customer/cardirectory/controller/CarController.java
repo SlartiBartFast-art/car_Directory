@@ -1,11 +1,11 @@
-package com.embedica.cardirectory.controller;
+package com.customer.cardirectory.controller;
 
-import com.embedica.cardirectory.model.Car;
-import com.embedica.cardirectory.model.CarDto;
-import com.embedica.cardirectory.model.CarResponse;
-import com.embedica.cardirectory.model.Statistic;
-import com.embedica.cardirectory.service.CarServiceImpl;
-import com.embedica.cardirectory.utils.AppConstants;
+import com.customer.cardirectory.model.CarResponse;
+import com.customer.cardirectory.model.Statistic;
+import com.customer.cardirectory.service.CarServiceImpl;
+import com.customer.cardirectory.utils.AppConstants;
+import com.customer.cardirectory.model.Car;
+import com.customer.cardirectory.model.CarDto;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
@@ -208,18 +208,4 @@ public class CarController {
         return new ResponseEntity<>(carService.deleteById(id) ? OK : NOT_FOUND);
     }
 
-    /**
-     * Delete all records that belong to that repository.
-     * The deleteAll() internally uses findAll() and delete() method
-     * @return void
-     */
-    @DeleteMapping("/all")
-    public ResponseEntity<Void> deleteAll() {
-        if (carService.findIdLastEntity() == 0) {
-            throw new IllegalArgumentException(
-                    "The objects don't exist! DB is empty");
-        }
-        carService.deleteAll();
-        return ResponseEntity.ok().build();
-    }
 }

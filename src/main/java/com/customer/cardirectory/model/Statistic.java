@@ -1,4 +1,4 @@
-package com.embedica.cardirectory.model;
+package com.customer.cardirectory.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

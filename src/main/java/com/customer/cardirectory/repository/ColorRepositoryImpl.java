@@ -1,6 +1,6 @@
-package com.embedica.cardirectory.repository;
+package com.customer.cardirectory.repository;
 
-import com.embedica.cardirectory.model.Color;
+import com.customer.cardirectory.model.Color;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
