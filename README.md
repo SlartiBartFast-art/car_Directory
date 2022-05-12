@@ -51,9 +51,12 @@ docker pull slartibartfastart/car-repository:latest
 
 для Linux: ~coding/docker/car_repository
 
-Скачайте файл docker-compose.yml, и положите в созданную вами папку
+Скачайте файл docker-compose.yml расположенный по адресу
 
-https://github.com/SlartiBartFast-art/car_Directory/blob/deploy/src/main/docker/docker-compose.yml
+https://github.com/SlartiBartFast-art/car_Directory/tree/master/src/main/docker
+
+ и положите в созданную вами папку
+
 
 откройте окно терминала:
 
