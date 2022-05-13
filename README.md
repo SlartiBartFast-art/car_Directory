@@ -153,11 +153,11 @@ http://localhost:8080/car/cars?pageSize=5&pageNo=1&sortBy=id&sortDir=asc
 
 http://localhost:8080/car/cars?pageSize=3&pageNo=1
 
-![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/deploy/image/Screenshot_21.jpg)
+![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_21.jpg)
 
 http://localhost:8080/car/cars?pageSize=2&pageNo=1&sortBy=id&sortDir=asc
 
-![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/deploy/image/Screenshot_20.jpg)
+![Image of Arch](https://github.com/SlartiBartFast-art/car_Directory/blob/master/image/Screenshot_20.jpg)
 
 /user/?search=
 
